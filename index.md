@@ -1,82 +1,67 @@
-About
+U8SDK
 =====
 
-MDwiki is a CMS/Wiki __completely built in HTML5/Javascript and runs 100% on the client__. No special software installation or server side processing is required. Just upload the `mdwiki.html` shipped with MDwiki into the same directory as your markdown files and you are good to go!
+U8SDK是一套技术开源的统一渠道SDK接入框架，能让手游开发商以最短的时间，一次性接入多家渠道SDK，让游戏快速上线。
+手游开发商只需要化一两天时间接入U8SDK抽象层框架，然后通过本地一键打包工具，即可打出最终的各个渠道SDK的渠道包。
+整个过程，方便快捷，安全可靠。同时，U8SDK整套框架的简单易扩展，使得手游开发商可以结合自己的业务需求，很方便地进行二次定制。
 
-Note: The website you are currently viewing is realized with MDwiki and hosted on [GitHub pages](http://pages.github.com/). [http://mdwiki.info](http://mdwiki.info) redirects here.
 
-[gimmick:twitterfollow](timodoerr)
+Note: U8SDK目前支持Android和iOS两个平台。U8Server目前已经开源([github地址](https://github.com/u8-xiaohei/U8Server))
 
-Features
+U8SDK开发语言
 --------
 
-  * Built completely in Javascript/HTML5 and __does not require any local or remote installations__
-  * Uses [Markdown][markdown] as its input markup language
-  * Build on top of [jQuery][jQuery] and [Bootstrap3][bootstrap] to work cross-browser, with responsive layout
-  * Extends Markdown with special [_Gimmicks_][gimmicks] that add rich client functions, like syntax highlighting via [hightlight.js][highlightjs], [GitHub Gists][gists], or [Google Maps][maps] for geo data
-  * Themeable through Bootstrap compatibility, supports all themes from [bootswatch](http://www.bootswatch.com)
+  * Android平台：抽象层框架采用java开发;
+  * Android平台：打包工具采用python开发，同时支持python2.7和python3.4版本
+  * Android平台：SDK接入工程采用java开发;
+  * iOS平台：抽象层框架采用objective-c开发;
+  * iOS平台：打包工具采用python开发，支持mac自带的python2.7版本
+  * iOS平台：SDK接入工程采用objective-c开发;
+  * Demo：支持Unity3D和Cocos2dx平台，分别采用C#和C++开发
 
 
-Requirements
+支持特性
 ------------
 
-* Webspace (or a web server that can serve static files)
-* Any modern Webbrowser
-* [mdwiki.html][download] file
+* 一次接入，多个游戏使用
+* 本地批量打包，Android平台采用反编译动态资源整合方式；iOS平台基于母包整合配置和资源，动态出包。
+* ICON角标自动处理(Android平台支持)
+* 统一闪屏处理，采用巧妙的配置，决定当前采用的闪屏类型
+* 渠道特殊逻辑支持
+* 游戏特殊逻辑支持
+* 插件集成(比如统计，分享，推送等)
+* 便于和持续集成环境相整合(比如整合到jenkins持续集成环境中)
 
-How does it work?
+我们的宗旨
 -----------------
 
-Just drop the `mdwiki.html` available from [the download page][download] along with your markdown files on a webspace somewhere. You can pass any url (relative to the `mdwiki.html` file) to mdwiki after the hashbang `#!`:
+U8SDK一直以来秉承开源的精神，U8SDK所有实现原理，都分享在我们的博客上，同时，我们还录制了完整介绍U8SDK原理的视频教程，目的只有一个，让所有使用U8SDK或者对统一渠道SDK接入解决方案感兴趣的童鞋，能够知其然知其所以然。
 
-    http://www.example.com/mdwiki.html#!myfile.md
+目前，U8Server我们已经开源了，也就是让所有使用U8SDK的同学，可以方便地基于U8Server来搭建一套统一用户认证中心和支付中心。U8SDK客户端也以最低的增值服务费用，来维持对U8SDK的技术支持和推广。因为，我们的目的很简单，就是让U8SDK一直坚持下去，并得到越来越多的游戏开发者的认可。
 
-If you rename the `mdwiki.html` into `index.html`, you can omit the filename on most webservers:
+所以，U8SDK面对的不是企业，而是千千万万个游戏开发从业者，我们希望为广大游戏开发者，提供一个关于渠道SDK接入交流的地方。这就是为什么，我们花费这么多时间来讲解U8SDK的实现原理，以及开源U8Server等。
 
-    http://www.example.com/#!myfile.md
-
-MDwiki will load a file called `index.md` from the same directory as the index.html by default, so if you use an `index.md` file as entry point, all you have to do is enter your domain name:
-
-    http://example.com/
-
-Note: There are lots more features over regular Markdown, check out the [quickstart tutorial][quickstart].
+所以，如果你是一枚游戏开发者，那么，U8SDK肯定是适合你的！
 
 - - - -
 
-Credits / Technologies
+资料和交流
 ----------------------
 
-MDwiki would not exist if it weren't for those great pieces of software:
+  * 欢迎加入U8SDK技术交流群: *207609068* (所有U8SDK的大哥大姐们，正在等着你呢)
+  * 视频教程：[U8SDK视频教程](http://www.chuanke.com/2869716-122613.html)
+  * 官方网站：[www.u8sdk.com](http://www.u8sdk.com)
+  * 官方博客：[www.uustory.com](http://www.uustory.com)
+  * 问答社区：[U吧社区](http://www.uustory.com/sdk)
+  * 增值服务：[U8SDK增值服务](http://www.u8sdk.com/plus/index.html)
+  * U8Server开源地址：[github地址](https://github.com/u8-xiaohei/U8Server)
 
-  * [marked][marked]
-  * [jQuery][jQuery]
-  * [Bootstrap][bootstrap]
-  * [Bootswatch][bootswatch]
-  * [colorbox][colorbox]
-  * [highlightjs][highlightjs]
 
-MDwiki is created by Timo Dörr. Follow me to get updates on MDwiki! [Follow @timodoerr](http://www.twitter.com/timodoerr).
-
-Cute kitten images provided by the great [placekitten.com] service.
-
-  [download]: download.md
-  [quickstart]: quickstart.md
-  [gimmicks]: gimmicks.md
-
-  [markdown]: http://daringfireball.net/projects/markdown/
-  [jQuery]: http://www.jquery.org
-  [bootstrap]: http://www.getbootstrap.com
-  [bootswatch]: http://www.bootswatch.com
-  [marked]: https://github.com/chjj/marked
-  [colorbox]: http://www.jacklmoore.com/colorbox/
-  [gists]: https://gist.github.com/
-  [maps]: http://maps.google.com/
-  [highlightjs]: https://highlightjs.org/
-  [placekitten.com]: http://www.placekitten.com/
-
-License
+关于我们
 -------
 
-MDwiki is licensed under [GNU GPLv3 with additional terms applied][license].
+曾经的我们，被渠道SDK深深折磨着，那个事经验不多，采用最简单粗暴的方式，最后为自己埋下了无数个苦果。后来，就有了现在的U8SDK，为的就是解脱自己，同时方便他人。
 
-  [license]: https://github.com/Dynalon/mdwiki/blob/master/LICENSE.txt
+不为商业的目的，也不是极客的行为，仅仅因为我们自己需要，所以，就诞生了~
+
+如果，你非要记住一个人，那么请记住，这个人叫[【小黑】](http://games.qq.com/a/20150720/021997.htm)
