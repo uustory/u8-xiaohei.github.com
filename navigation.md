@@ -5,7 +5,7 @@
 [快速上手]()
 
   * [环境搭建](setup.md)
-  * [游戏接入](quickstart.md)
+  * [API调用](quickstart.md)
   * [打出渠道包](package.md)
   * [打包工具](package_readme.md)
 
