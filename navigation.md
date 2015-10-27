@@ -6,8 +6,11 @@
 
   * [环境搭建](setup.md)
   * [API调用](quickstart.md)
+
+[打包工具]()
+
   * [打出渠道包](package.md)
-  * [打包工具](package_readme.md)
+  * [打包工具说明](package_readme.md)
 
 [Android文档]()
 
@@ -23,7 +26,7 @@
   - - - -  
   * [渠道升级](ios_updatechannel.md)
 
-[接入实例]()
+[接入实例]()ss
 
   * [Android](android_demo.md)
   * [Unity3D](unity_demo.md)
