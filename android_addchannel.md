@@ -152,6 +152,63 @@ public class AAASDK {
 
 具体的接入，可以你的U8SDK目录中U8SDK_Projects目录下的已经接好的渠道SDK工程。
 
+触发U8SDK事件
+-------
+
+NOTE:接入工程中，在初始化成功，失败；登录成功，失败；切换帐号成功，失败；登出成功，失败；支付成功，失败 等时刻，都需要往抽象层抛出对应的事件，以便抽象层中能够分发这些事件，这样游戏接入工程监听这些事件，就能做对应的逻辑处理。
+
+```
+1、普通事件
+
+所有的错误或者失败时，都可以通过调用U8SDK.getInstance().onResult()方法抛出对应的事件。比如：
+   
+   初始化成功：U8SDK.getInstance().onResult(U8Code.CODE_INIT_SUCCESS, "init success");
+   初始化失败：U8SDK.getInstance().onResult(U8Code.CODE_INIT_FAIL, "init failed");
+   登录失败：U8SDK.getInstance().onResult(U8Code.CODE_LOGIN_FAIL, "login failed.resultCode:"+resultCode);
+   ......
+
+所有事件类型都在U8Code中定义的常量。
+
+一般对于无关紧要的事件，也就是不需要游戏中做特殊处理，或者不需要传递很多参数的事件，我们都采用这种方式。
+
+2、登录成功事件
+
+SDK登录成功时，需要调用U8SDK.getInstance().onLoginResult(String ext)方法，抛出登录成功事件。
+
+SDK登出成功之后，一般会返回一些用户信息和token或者session之类的，用于登录认证的凭据。我们需要将登录认证需要的参数传给U8Server进行二次认证。但是二次认证是统一在抽象层做的。
+
+这里我们直接将登录认证需要的参数，通过ext参数传到抽象层中即可。
+
+如果含有多个参数，可以采用json格式；如果只有一个参数，直接传这个参数即可。或者你也可以采用其他的格式，只要U8Server那边也根据同样的格式进行解析。
+
+3、切换帐号成功事件
+
+SDK切换帐号成功的事件，有可能有两种情况，一个是仅仅登出当前登录用户，弹出登录框；一个是切换帐号并且已经登录了另一个帐号。
+
+对于第一个情况，我们调用U8SDK.getInstance().onSwitchAccount()
+
+游戏中监听对应的事件时，收到onSwitchAccount时，需要返回游戏的登录界面，并显示SDK的登录界面
+
+对于第二个情况，我们调用U8SDK.getInstance().onSwitchAccount(String ext)接口。里面的参数格式和登录成功一致
+
+游戏中监听对应的事件时，收到该事件时，需要返回游戏的登录界面，并直接将用户信息显示一下，无需弹出SDK登录界面
+
+4、登出成功事件
+
+SDK登出成功之后，或者用户在SDK个人中心界面中点击登出时，我们需要抛出一个U8SDK.getInstance().onLogout()事件。
+
+游戏中监听对应的事件时，收到onLogout时，需要返回游戏的登录界面让用户重新登录
+
+5、支付成功
+
+因为网游一般支付都是异步通知到游戏服务器的，SDK返回的支付成功，并不能代表玩家真的拿到游戏币了。所以，客户端SDK返回的支付成功事件，我们一般不需要做特殊的逻辑处理。
+
+所以支付成功，我们依然使用onResult接口，抛出一个支付成功的事件即可。
+
+U8SDK.getInstance().onResult(U8Code.CODE_PAY_SUCCESS, "pay success");
+
+```
+
 实现IUser接口
 -------
 
