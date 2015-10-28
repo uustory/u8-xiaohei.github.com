@@ -17,6 +17,7 @@
   * [接入新渠道](android_addchannel.md)
   * [打包工具配置](android_package.md)  
   - - - -
+  * [自定义脚本](android_script.md)
   * [渠道升级](android_updatechannel.md)
 
 [iOS文档]()
@@ -24,9 +25,10 @@
   * [接入新渠道](ios_addchannel.md)
   * [打包工具配置](ios_package.md)
   - - - -  
+  * [自定义脚本](ios_script.md)
   * [渠道升级](ios_updatechannel.md)
 
-[接入实例]()ss
+[接入实例]()
 
   * [Android](android_demo.md)
   * [Unity3D](unity_demo.md)
