@@ -15,7 +15,7 @@
 [Android文档]()
 
   * [接入新渠道](android_addchannel.md)
-  * [打包工具配置](android_package.md)  
+  * [新渠道配置](android_package.md)  
   - - - -
   * [自定义脚本](android_script.md)
   * [渠道升级](android_updatechannel.md)
@@ -30,13 +30,14 @@
 
 [接入实例]()
 
-  * [Android](android_demo.md)
+  * [原生平台](android_demo.md)
   * [Unity3D](unity_demo.md)
   * [Cocos2dx](cocos2dx_demo.md)
 
 [U8Server]()
 
   * [U8Server简介](u8server.md)
+  * [环境搭建](u8server_setup.md)
   * [登录认证](u8server_login.md)
   * [获取订单号](u8server_order.md)
   * [支付回调](u8server_pay.md)
