@@ -300,4 +300,165 @@ plugins:当前渠道支持的插件
 
 iOS平台打包工具
 -------
-待续
+
+NOTE:iOS打包工具根目录为U8SDKTools-ipa,打包工具和android平台打包工具一样，采用python实现。无需安装任何第三方库，支持Mac自带的python2.7版本。
+
+**1、目录说明**
+
+```
+buildscript: 打包脚本源码目录
+Core: U8SDK抽象层框架工程目录
+iparepacker:仅仅渠道号不同的ipa包，打包工具。（CPS包）
+Plugins:所有渠道SDK接入工程目录
+workspace:测试游戏工作目录
+	---common:该游戏通用配置目录
+	---channels:当前游戏中各个渠道SDK的配置
+	---projects:打包生成的临时工程目录
+	---release:最终渠道包的存放位置
+```
+
+**2、游戏目录的配置**
+
+```
+iOS中打包方式基于母工程来完成，所以，我们采用了更加灵活的方式，来指定母工程的位置：
+
+在打包工具的运行命令的参数中指定游戏工程的位置。
+
+打包的时候，先将母工程，拷贝出来一份，作为当前渠道的工作工程，所以，我们需要指定一个工作目录，将所有的需要的基础配置和各个渠道的参数配置，各个渠道打包生成的临时工程，以及存储最终生成的渠道包。
+
+所以，打包的时候，执行命令，同时需要指定母工程的位置（指定到xcodeproj）和当前游戏的工作目录
+./buildscript/build.py ~/git/U8SDKDemo/U8SDKDemoForIOS/U8SDKDemoForIOS.xcodeproj/ u8test/
+
+
+```
+
+**3、闪屏配置**
+
+NOTE:部分渠道有闪屏要求，一般我们可以在游戏工作目录中的common目录中，放上通用的闪屏文件，同样的命名为LaunchImage.launchimage，结构和下图一样。对于没有闪屏的渠道SDK，默认将使用这里的闪屏
+
+```
+各个渠道的闪屏文件，按照固定的格式，放在改游戏工作目录／channels下该渠道的配置目录。在名称为LaunchImage.launchimage的目录下，存放对应尺寸的图片，命名格式和文件结构如下图：
+```
+![](images/ios_launchimages.png)
+
+**4、ICON配置**
+
+NOTE:部分渠道没有角标要求，我们可以直接将游戏的ICON放在游戏工作目录中的common目录中，同样命名为AppIcon.appiconset，结构和下图一致。这样，没有角标需求的渠道的ICON，将默认使用这个。
+
+```
+如果渠道SDK有要求ICON加角标，那么需要让美术同学做好对应的带有角标的ICON，按照固定的方式，存放在游戏工作目录／channels下改渠道的配置目录。在名称为AppIcon.appiconset的目录下，存放对应尺寸的图片，命名格式和文件结构如下：
+```
+![](images/ios_icon.png)
+
+**5、游戏通用配置**
+
+```
+在游戏工作目录/common中，我们需要定义一个config.json文件，在iOS的打包工具中，我们都是采用json文件来配置参数信息。
+
+这里的config.json文件，我们配置当前游戏的一些通用信息：
+
+{
+	"product_name":"u8demo",
+	"provision":"iOSTeam Provisioning Profile: *",
+	"U8SDK": {
+		"AppId": 1,
+		"AppKey": "f32fdc02123a82524eb4ea95e1383d0b"
+	},
+	"U8Url": "http://127.0.0.1:8080/getToken"
+}
+
+product_name：当前游戏名称
+provision：当前游戏打包使用的provision
+U8SDK：这里配置U8SDK的配置数据：
+	---AppId:U8Server(或者你们服务器)分配给当前游戏的appID
+	---AppKey:U8Server(或者你们服务器分配给当前游戏的AppKey)
+U8Url：登录认证的服务器地址(U8Server地址或者你们自己服务器用于渠道登录认证的地址)
+
+```
+
+**6、渠道参数配置**
+
+```
+渠道参数的配置，例如，渠道分配的appID，appKey，SecretKey等参数，各个游戏都不相同，所以，我们需要将这些参数配置在各个游戏的工作目录中。
+
+所以，我们在各个游戏的工作目录中，我们都需要建立一个channels子目录，用于存放各个渠道的参数配置，和特殊资源。比如，iTools渠道，我们在channels目录下，新建一个iTools目录，然后在这个目录中，新建一个config.json，内容如下：
+
+{
+	"desc":"iTools苹果市场",
+	"U8SDK": {
+		"Channel": 1000
+	},
+	"plugins": [
+		{
+			"name": "iTools",
+			"appid": "1",
+			"appkey": "58C6A68DDDEE471AA43266E427F38D92"
+		}
+	]
+}
+
+desc：当前渠道的名称或者说明
+U8SDK：和common下的config.json中的U8SDK节点的内容会合并到一起。
+	 ---Channel:当前渠道的渠道号
+plugins:这里是配置当前渠道支持的插件，注意这里是数组，这里支持将多个插件组合在一起，比如，我们接AppStore的时候，AppStore只有一个支付功能，我们还需要接入一个登录功能，我们希望使用Facebook登录。那么，我们可以独立接入AppStore和Facebook，然后在这里，配置这两个插件
+	---name:渠道名称，渠道SDK接入工程命名规则时U8SDK_***;这里的名称，必须和***一致。比如插件工程命名为U8SDK_iTools，那么这里的name的值必须为iTools.
+	---其他渠道参数，代码中或者自定义脚本中需要的参数，都可以在这里添加，key和读取的时候，保持一致即可
+
+```
+
+**7、渠道SDK目录**
+
+```
+iOS平台打包工具和Android平台的打包工具，还有一个重要的差别，iOS平台的打包工具，渠道SDK接入工程目录也是渠道SDK的配置目录，不像Android平台中，我们区分了接入工程和渠道SDK的配置目录。所以，我们默认统一将所有渠道SDK的接入工程放在打包工具／Plugins目录下。
+
+你也可以在打包的时候，在命令参数中，通过－p 来指定所有渠道SDK所在的目录
+
+之前我们说过，所有渠道和插件的接入工程的命名，我们采用统一的命名方式：U8SDK_***；这里的***就是当前渠道SDK的名称，在渠道参数配置中配置name的时候，就填这里的***
+
+所以，Plugins目录下的文件结构如下：
+
+```
+![](images/ios_plugins.png)
+```
+具体的SDK接入工程下，以下文件和目录，是固定且必须的：
+
+libU8SDK_iTools.a:当前接入工程生成的静态库文件；每个接入工程，我们都需要通过一个生成静态库的target来生成一个静态库，命名格式为lib+工程名
+
+SDK目录：这个目录中存放当前渠道SDK提供的所有库文件和资源。
+
+xcode_process.py:当前渠道SDK的配置文件和自定义脚本，我们在这个文件中，配置当前渠道SDK编译的时候，需要添加的库文件，依赖的系统库等，同时，还脚本中，还定义了当前渠道SDK特殊逻辑的自定义处理接口。
+
+比如iTools的渠道SDK的xcode_process.py文件的内容如下：
+
+mods = {
+    "group": "U8SDK_iTools",
+    "files": [
+        "libU8SDK_iTools.a",
+    ],
+    "folders": [
+        "SDK"
+    ],
+    "frameworks": [
+        "MobileCoreServices.framework",
+        "AdSupport.framework",
+        "UIKit.framework"
+    ],
+    "libs": [
+        "libsqlite3.dylib"
+    ]
+}
+
+def post_process(self, project, infoPlist, sdkparams):
+
+    self.addBundleURLType(CFBundleTypeRole="Editor", CFBundleURLSchemes=[self.getBundleId()])
+    
+    infoPlist['UIViewControllerBasedStatusBarAppearance'] = False
+
+
+mods是一个json配置，我们在这里配置当前渠道SDK编译需要的group，files，folders，frameworks，libs等
+
+post_process是在编译的时候，执行的自定义逻辑，这里我们根据渠道SDK要求，添加了指定的URL Types和增加了一个属性到plist文件中。
+
+```
+
+
