@@ -41,6 +41,7 @@
   * [登录认证](u8server_login.md)
   * [获取订单号](u8server_order.md)
   * [支付回调](u8server_pay.md)
+  * [后台管理](u8server_manager.md)
 
 [官方网站](http://www.u8sdk.com)
 [官方博客](http://www.uustory.com)
