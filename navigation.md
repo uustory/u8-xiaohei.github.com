@@ -23,10 +23,8 @@
 [iOS文档]()
 
   * [接入新渠道](ios_addchannel.md)
-  * [打包工具配置](ios_package.md)
   - - - -  
   * [自定义脚本](ios_script.md)
-  * [渠道升级](ios_updatechannel.md)
 
 [接入实例]()
 
