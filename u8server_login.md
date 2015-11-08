@@ -2,6 +2,7 @@
 ==========
 
 NOTE: 大部分渠道SDK都需要进行登录认证操作。客户端SDK登陆成功之后，渠道SDK一般会返回一个sessionId，token等数据，用于二次登录认证的凭据。
+获取订单号，对应的类是：com.u8.server.web.UserAction
 
 说明
 ----------
@@ -74,7 +75,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 	extension：当前渠道登录成功的参数(sid,token,sessionId等，一个或者多个)，这里格式各个渠道SDK可能不一样。
 	sign：md5("appID="+appID+"channelID="+channelID+"extension="+extension+appKey);这里U8SDK抽象层按照格式，生成一个md5串，appKey是U8Server分配给游戏的AppKey
 
-返回：
+返回(JSON格式)：
 	{ 
 	  state: 1（登录认证成功）；其他失败
 	  data: 认证成功才有数据，否则为空
@@ -102,7 +103,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 	token：上面登录认证成功之后，U8Server返回的token
 	sign：md5("userID="+userID+"token="+token+appKey);这里游戏服务器按照格式，生成一个md5串，appKey是U8Server分配给游戏的AppKey
 
-返回：
+返回(JSON格式)：
 	{
 	  state: 1(登录认证成功)；其他失败
 	  data: 认证成功才有数据，否则为空
