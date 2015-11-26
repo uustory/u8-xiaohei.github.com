@@ -66,10 +66,10 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 登录认证地址：http://localhost:8080/pay/getOrderID
 请求方式：POST或者GET
 参数：
-	userID：U8Server分配给当前游戏的appID
-	productID：当前客户端的渠道ID
-	productName：当前渠道登录成功的参数(sid,token,sessionId等，一个或者多个)，这里格式各个渠道SDK可能不一样。
-	productDesc：游戏内充值选项的描述
+	userID：用户登录认证之后u8server生成的userID，每个用户唯一
+	productID：客户端里面充值选项对应的ID
+	productName：客户端里面充值选项对应的名称
+	productDesc：客户端里面充值选项的描述
 	money：当前充值金额，单位分
 	roleID：当前游戏内角色ID
 	roleName：当前游戏内角色名称
