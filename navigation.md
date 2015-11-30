@@ -31,6 +31,7 @@
   * [原生平台](android_demo.md)
   * [Unity3D](unity_demo.md)
   * [Cocos2dx](cocos2dx_demo.md)
+  * [Flash](flash_demo.md)
 
 [U8Server]()
 
