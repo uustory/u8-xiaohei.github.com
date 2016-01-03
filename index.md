@@ -18,7 +18,7 @@ U8SDK开发语言
   * iOS平台：打包工具采用python开发，支持mac自带的python2.7版本
   * iOS平台：SDK接入工程采用objective-c开发;
   * U8Server: 采用J2EE框架(Struts2+Spring3+Hibernate3)开发
-  * Demo：支持Unity3D和Cocos2dx平台，分别采用C#和C++开发
+  * Demo：支持Unity3D、Cocos2dx、Flash平台，分别采用C#、C++和ActionScript开发
 
 
 支持特性
