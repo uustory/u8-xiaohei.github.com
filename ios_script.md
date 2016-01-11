@@ -1,9 +1,25 @@
 自定义脚本
 ==========
 
-NOTE: 部分渠道SDK有自己的特殊需求，这些需求，我们不便和游戏工程进行耦合，所以，我们采用自定义脚本，在打包的时候，动态来完成这些工作。
+NOTE:接入过越狱SDK的都知道，接入一家渠道SDK，除了要编码，还要修改xcode工程配置，具体的操作一般是添加库, 资源包，修改Info.plist. 我们的自动打包脚本封装了这些基本操作，并设计了一个处理流水线，流水线的每个环节都是一个自定义的python脚本。
 
-说明
+脚本处理流程
+-------
+
+以下是U8SDK的处理流水线
+
+![](images/pipeline.png)
+
+
+*  游戏自定义脚本，这个脚本用来处理渠道无关的修改。
+
+*  U8SDK的处理脚本
+
+*  插件处理脚本, 一个渠道可以加入多个插件，依次执行各个插件的处理脚本
+
+*  渠道自定义脚本, 可以处理一些渠道的特殊需求
+
+自定义脚本说明
 -------
 
 ```
@@ -112,12 +128,8 @@ def updateInfoPlist(self, m):
 #获取U8SDK中的通用参数
 def getInfoU8SDKParams(self):
 
-
 #获取当前渠道中的所有插件参数
 def getInfoU8SDKPlugins(self):
-
-#添加或者修改插件参数
-def addPlugin(self, name, params):
 
 #添加Embedded Binaries
 def embed_binary(self, path):

@@ -63,6 +63,12 @@ sdk-check-update.bat：检查当前有更新的SDK，并更新
 		<param name="appDesc" value="测试游戏1" desc="当前游戏的中文名称"/>
 		<param name="orientation" value="landscape" desc="游戏是横屏还是竖屏(landscape|portrait),不配置默认是横屏" />
 		<param name="cpuSupport" value="armeabi|armeabi-v7a" desc="当前游戏支持的cpu类型"/>
+		<param name="versionCode" value="15" desc="游戏包的版本号,对应AndroidManifest.xml中的versionCode"/>
+		<param name="versionName" value="2.8.5" desc="游戏包中的版本名称,对应AndroidManifest.xml中的versionName"/>
+		<param name="minSdkVersion" value="8" desc="最小支持的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
+		<param name="targetSdkVersion" value="20" desc="默认使用的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
+		<param name="maxSdkVersion" value="22" desc="最大支持的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
+		<param name="outputApkName" value="{channelName}.apk" desc="最终apk包名格式：{bundleID}:包名,{versionName}:版本名称,{versionCode}:版本号,{time}:时间戳(yyyyMMddmmss),{channelID}:渠道号,{channelName}:渠道名,{appName}:游戏名,{appID}:appID"/>	
 	</game> 	
 
 （3）从其他游戏配置目录下，拷贝一份channels和keystore过来，同时拷贝config.xml和keystore.xml两个配置文件
@@ -264,6 +270,8 @@ post_script.py: 后置执行脚本
 		<param name="splash" value="0" />
 		<param name="splash_copy_to_unity" value="0" />
 		<param name="icon" value="rb" />
+		<param name="gameName" value="大话西游" />
+		<param name="signApk" value="0" />
 
 		<sdk-params>
 			<param name="UCGameId" value="544156" desc="GameId"/>
@@ -291,6 +299,8 @@ suffix:包名后缀，也可以配置全包名
 splash:闪屏类型
 splash_copy_to_unity:拷贝闪屏到Unity默认闪屏（Unity工程项目适用）
 icon:是否处理角标，角标位置是rb（right-bottom）具体类型详情，可以看博客
+gameName:如果渠道包的游戏名称特殊，可以配置这里，将覆盖母包的游戏名称
+signApk:是否对最终的apk包进行签名。默认是签名的，如果不需要签名，则设置为0
 sdk-version:用于和u8server对比使用的版本
 sdk-params:当前渠道的参数配置
 plugins:当前渠道支持的插件
