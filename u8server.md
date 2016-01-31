@@ -7,7 +7,7 @@ NOTE:U8Server是统一的渠道SDK登录认证中心和支付中心，是U8SDK�
 ----------
 
 U8Server开源地址：[github](https://github.com/u8-xiaohei/U8Server)
-
+视频教程(U8Server):[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)
 
 简介
 ----------

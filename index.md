@@ -52,6 +52,7 @@ U8SDK一直以来秉承开源的精神，U8SDK所有实现原理，都分享在�
   * 欢迎加入U8SDK技术交流群: *207609068* (所有U8SDK的大哥大姐们，正在等着你呢)
   * 视频教程(Android)：[U8SDK Android部分视频教程](http://www.chuanke.com/2869716-122613.html)
   * 视频教程(iOS):[U8SDK iOS部分视频教程](http://www.chuanke.com/2869716-161991.html)
+  * 视频教程(U8Server):[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)
   * 官方网站：[www.u8sdk.com](http://www.u8sdk.com)
   * 官方博客：[www.uustory.com](http://www.uustory.com)
   * 问答社区：[U吧社区](http://www.uustory.com/sdk)
