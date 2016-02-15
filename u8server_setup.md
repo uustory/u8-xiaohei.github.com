@@ -50,7 +50,7 @@ java web开发环境
 
 如果是Mac 用户，那么可以参考下面这篇文章，来安装Tomcat:
 
-[Mac下安装Tomcat](http://wgxsoft.blog.163.com/blog/static/1738191712015226159200/)
+[Mac下安装MySQL](http://wgxsoft.blog.163.com/blog/static/1738191712015226159200/)
 
 **4、安装IDEA**
 
