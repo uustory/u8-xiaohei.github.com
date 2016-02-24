@@ -38,6 +38,7 @@ Windows下主要搭建Android的开发环境，以及U8SDK Android部分的开�
 ><font size=2>根据你当前使用python版本，下载对应版本的easy_install安装文件。比如，你安装的是32位的python2.7版本。那么你可以下载[setuptools-0.7.win32-py2.7.msi](https://bitbucket.org/pypa/setuptools/downloads/setuptools-0.7.win32-py2.7.msi),然后进行安装即可。</font><br/>
 ><font size=2>安装完easy_install之后，打开命令行，运行[easy_install]命令应该可以看到easy_install命令的相关信息。如果提示“easy_install 不是内部或者外部命令，也不是可运行的程序或批处理文件”，那请检查easy_install是否安装正确。</font>
 
+Note:**如果执行easy_install有错误;可以尝试用 python -m easy_install pip 试试**
 
 * 安装 pip
 
@@ -54,6 +55,7 @@ Windows下主要搭建Android的开发环境，以及U8SDK Android部分的开�
 [U8SDK扩展——处理各渠道角标](http://www.uustory.com/?p=1666)
 [U8SDK——自动处理渠道SDK的角标（补充）](http://www.uustory.com/?p=1778)
 
+Note:**如果执行pip install有错误;可以尝试用 python -m pip install pillow 试试**
 
 Mac下环境搭建
 --------
