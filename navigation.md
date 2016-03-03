@@ -37,6 +37,7 @@
 
   * [U8Server简介](u8server.md)
   * [环境搭建](u8server_setup.md)
+  * [部署教程](u8server_deploy.md)
   * [U8Framework4SSH](u8server_framework.md)
   * [登录认证](u8server_login.md)
   * [获取订单号](u8server_order.md)

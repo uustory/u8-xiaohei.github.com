@@ -52,6 +52,7 @@ Note:**如果执行easy_install有错误;可以尝试用 python -m easy_install 
 
 关于PIL的安装，如果遇到问题，你可以访问我们博客上对应的文章。
 
+[PILLOW 安装失败可以看这里](http://pillow-cn.readthedocs.org/zh_CN/latest/installation.html)
 [U8SDK扩展——处理各渠道角标](http://www.uustory.com/?p=1666)
 [U8SDK——自动处理渠道SDK的角标（补充）](http://www.uustory.com/?p=1778)
 
