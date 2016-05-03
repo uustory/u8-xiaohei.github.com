@@ -3,6 +3,9 @@ U8Server
 
 NOTE:U8Server是统一的渠道SDK登录认证中心和支付中心，是U8SDK统一接入框架中，不可缺少的一部分。目前，U8Server已经支持了20多家渠道SDK，并且已经开源，开源地址：[github](https://github.com/u8-xiaohei/U8Server)
 
+U8Server后台管理系统，在线演示地址：[U8Server演示地址](http://xzy.u8sdk.com:8080/u8server/admin/login)
+用户名和密码：u8sdk/u8sdk
+
 开源地址
 ----------
 

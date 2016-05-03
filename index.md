@@ -47,7 +47,7 @@ U8SDK一直以来秉承开源的精神，U8SDK所有实现原理，都分享在�
 - - - -
 
 资料和交流
-----------------------
+-----------
 
   * 欢迎加入U8SDK技术交流群: *207609068* (所有U8SDK的大哥大姐们，正在等着你呢)
   * 视频教程(Android)：[U8SDK Android部分视频教程](http://www.chuanke.com/2869716-122613.html)
@@ -58,6 +58,17 @@ U8SDK一直以来秉承开源的精神，U8SDK所有实现原理，都分享在�
   * 问答社区：[U吧社区](http://www.uustory.com/sdk)
   * 增值服务：[U8SDK增值服务](http://www.u8sdk.com/plus/index.html)
   * U8Server开源地址：[github地址](https://github.com/u8-xiaohei/U8Server)
+
+
+演示的渠道包
+-------------
+
+这里提供几个渠道包， 给大家演示下， 母包接入U8SDK之后，通过打包工具打出来的渠道包，所包含的一些功能。可以看下， 登录，登出，切换帐号，浮标显示，支付，以及SDK界面中切换帐号和登出等回调触发，退出游戏等功能
+
+
+  * [360渠道包](http://pan.baidu.com/s/1hrKM8ok)
+  * [酷派渠道包](http://pan.baidu.com/s/1qYb1otu)
+  * [百度的包](http://pan.baidu.com/s/1cHRmZc)
 
 
 诞生理由
