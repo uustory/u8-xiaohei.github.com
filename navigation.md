@@ -19,6 +19,8 @@
   - - - -
   * [自定义脚本](android_script.md)
   * [渠道升级](android_updatechannel.md)
+  - - - -
+  * [渠道问题汇总](android_faq.md)
 
 [iOS文档]()
 
