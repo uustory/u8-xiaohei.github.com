@@ -1,7 +1,7 @@
 环境搭建
 =========
 
-NOTE:U8Server现在采用gradle构建了，同时我们为大家提供了视频教程，让大家能够快速地搭建和部署U8Server开发环境。这里的文档是使用gradle之前的文档，如果使用gradle构建方式之前的童鞋，这里的文档依然适用。视频教程地址:[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)
+NOTE:<font style='color:red;'>U8Server现在采用gradle构建了，同时我们为大家提供了视频教程，让大家能够快速地搭建和部署U8Server开发环境。这里的文档是使用gradle之前的文档，如果使用gradle构建方式之前的童鞋，这里的文档依然适用。视频教程地址:[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)</font>
 
 ```
 U8Server采用java web标准框架J2EE开发，所以，理论上，任何能够开发java web应用程序的IDE都可以用来开发U8Server，比如eclipse,myeclipse,intellij idea。我们这里，仅仅演示在Intellij IDEA 中从头导入U8Server，然后进行配置，最终能够直接跑起来的过程。
