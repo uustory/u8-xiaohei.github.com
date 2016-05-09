@@ -87,6 +87,60 @@ sdk-check-update.bat：检查当前有更新的SDK，并更新
 
 OK，到这里，你就可以执行package.bat，按照提示，选择你当前这个游戏，打一个渠道包玩玩了~
 
+
+
+**渠道配置**
+	
+```
+每个游戏需要打包的渠道和渠道配置都在打包工具/games/当前游戏/config.xml中。每个渠道对应一个channel节点的渠道配置
+
+
+	<channel>
+		<param name="id" value="10" />
+		<param name="name" value="uc" />
+		<param name="sdk" value="uc" />
+		<param name="desc" value="UC SDK" />
+		<param name="suffix" value=".uc" />	
+		<param name="splash" value="0" />
+		<param name="splash_copy_to_unity" value="0" />
+		<param name="icon" value="rb" />
+		<param name="gameName" value="大话西游" />
+		<param name="signApk" value="0" />
+
+		<sdk-params>
+			<param name="UCGameId" value="544156" desc="GameId"/>
+			<param name="UCCpId" value="55398" desc="CpId"/>
+			<param name="UCDebugMode" value="false" desc="是否开启调试模式(true|false)"/>
+		</sdk-params>
+
+		<plugins>
+			<plugin name="download" desc="apk 下载插件" />
+		</plugins>
+
+		<sdk-version>
+			<versionCode>1</versionCode>   <!--versionCode用于渠道SDK的更新使用-->
+			<versionName>4.0</versionName><!--versionName用于标识当前SDK的版本，和渠道SDK的版本一致-->
+		</sdk-version>	
+
+	</channel>
+
+
+id:一号通分配的渠道号
+name:渠道名称，保证唯一性
+sdk:当前使用的SDK目录名称
+desc:SDK 注明
+suffix:包名后缀，也可以配置全包名
+splash:闪屏类型
+splash_copy_to_unity:拷贝闪屏到Unity默认闪屏（Unity工程项目适用）
+icon:是否处理角标，角标位置是rb（right-bottom）具体类型详情，可以看[这篇博客](http://www.uustory.com/?p=1778)
+gameName:如果渠道包的游戏名称特殊，可以配置这里，将覆盖母包的游戏名称
+signApk:是否对最终的apk包进行签名。默认是签名的，如果不需要签名，则设置为0
+sdk-version:用于和u8server对比使用的版本
+sdk-params:当前渠道的参数配置
+plugins:当前渠道支持的插件
+
+```
+
 **3、母包相关**
 
 ```
@@ -99,10 +153,18 @@ OK，到这里，你就可以执行package.bat，按照提示，选择你当前�
 **4、ICON配置**
 
 ```
-当前支持自动缩放games/game1/icon目录下的icon.png，缩放成不同分辨率的icon，如果渠道有角标，并在config.xml中配置了
-那么，脚本会自动根据配置，来将角标附加到游戏Icon上面
+当前支持自动缩放games/game1/icon目录下的icon.png(大小512*512像素)，缩放成不同分辨率的icon，如果渠道需要附加角标，我们可以通过在上面渠道配置参数那里，设置
 
-如果觉得缩放有损，导致图标模糊，那么可以让美术最好各种分辨率的ICON，然后在每个游戏配置目录下有channels目录，用来配置渠道的特殊资源
+<param name="icon" value="rb" />
+
+关于这里值的含义，可以参考[这篇博客](http://www.uustory.com/?p=1778)
+
+那么，脚本会根据配置，自动将角标附加到游戏Icon上面
+
+另一种配置方式：
+
+如果觉得打包工具自动处理的缩放有损，导致图标模糊，那么可以让美术最好各种分辨率的ICON，然后在每个游戏配置目录下有channels目录，用来配置渠道的特殊资源
+
 我们就利用这个目录，来完成各个渠道ICON的配置
 
 比如UC(渠道号503)是需要角标的，事先我们让美术制作几种尺寸的带UC角标的ICON，几种尺寸为：
