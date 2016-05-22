@@ -11,6 +11,7 @@ NOTE:秉着游戏和SDK开发完全解耦的思想，遇到某些渠道SDK的特
 3、WXEntryActivity需要放在游戏包名+.wxapi包名路径下
 4、游戏启动Activity必须为渠道SDK提供的某个闪屏Activity
 5、游戏Application必须为渠道SDK提供的某个Application
+6、友盟统计中我们需要根据渠道来区分
 ......
 ```
 等等这些情况，我们都能够通过自定义脚本来完成。否则，你就需要耦合该渠道SDK和具体的游戏。
@@ -52,6 +53,34 @@ def execute(channel, decompileDir, packageName):
 2、channel:渠道对象,里面有当前渠道的参数等数据
 3、decompileDir:当前渠道的工作目录
 4、pacakageName:最终的包名
+
+```
+
+如果是插件目录，那么新建一个script.py，对应里面的接口是：
+
+```
+import file_utils
+import os
+import os.path
+from xml.etree import ElementTree as ET
+from xml.etree.ElementTree import SubElement
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import ElementTree
+import os
+import os.path
+import zipfile
+import re
+import subprocess
+import platform
+from xml.dom import minidom
+import codecs
+import sys
+
+androidNS = 'http://schemas.android.com/apk/res/android'
+
+
+def execute(channel, pluginInfo, decompileDir, packageName):
+	//这里写自定义逻辑
 
 ```
 
@@ -230,6 +259,50 @@ def execute(channel, decompileDir, packageName):
 	tree.write(manifest, 'UTF-8')
 
 	return 0
+　```
 
 
+脚本实例3
+-------
+
+1、场景
+
+友盟统计插件，需要在AndroidManfeist.xml中配置一个UMENG_CHANNEL，这个值每个渠道都不同，后台根据这个渠道来区分来源
+
+2、解决方案
+
+因为这个值是每个渠道都不同的，所以，我们不可能每个渠道打包的时候，手动来设置。所以，最好的版本，就是通过自定义脚本来实现。
+解决方案的思路是：我们在插件config.xml中的param中定义一个key为UMENG_CHANNEL的参数，然后通过自定义脚本，将这个参数的值，设置为当前渠道的名称
+
+3、代码片段
+
+```
+import file_utils
+import os
+import os.path
+from xml.etree import ElementTree as ET
+from xml.etree.ElementTree import SubElement
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import ElementTree
+import os
+import os.path
+import zipfile
+import re
+import subprocess
+import platform
+from xml.dom import minidom
+import codecs
+import sys
+
+androidNS = 'http://schemas.android.com/apk/res/android'
+
+
+def execute(channel, pluginInfo, decompileDir, packageName):
+
+	if 'params' in pluginInfo and len(pluginInfo['params']) > 0:
+		for param in pluginInfo['params']:
+			name = param.get('name')
+			if name == 'UMENG_CHANNEL':
+				param['value'] = channel['name']
+				break
 ```
