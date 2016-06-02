@@ -17,6 +17,8 @@
   * [接入新渠道](android_addchannel.md)
   * [新渠道配置](android_package.md)  
   - - - -
+  * [插件扩展](android_plugins.md)  
+  - - - -
   * [自定义脚本](android_script.md)
   * [渠道升级](android_updatechannel.md)
   - - - -
