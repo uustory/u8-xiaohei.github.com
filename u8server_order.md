@@ -63,7 +63,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 
 ```
 
-登录认证地址：http://localhost:8080/pay/getOrderID
+下单地址：http://localhost:8080/pay/getOrderID
 请求方式：POST或者GET
 参数：
 	userID：用户登录认证之后u8server生成的userID，每个用户唯一
@@ -76,6 +76,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 	serverID：当前玩家所在的服务器ID
 	serverName：当前玩家所在的服务器名称
 	extension：自定义字段，支付回调的时候，会原封不动回调给游戏服务器
+    notifyUrl：游戏服的支付回调地址，用于u8server支付成功之后，异步通知游戏服务器，游戏服务器给玩家发游戏币或者游戏道具
 	sign：rsa签名（签名算法，见最后）签名使用的私钥是U8Server生成的，创建游戏的时候会生成，给到游戏那边
 
 返回(json格式)：
@@ -105,8 +106,12 @@ private static String generateSign(String userID, PayParams data) throws Unsuppo
             .append("roleName=").append(data.getRoleName()).append("&")
             .append("serverID=").append(data.getServerId()).append("&")
             .append("serverName=").append(data.getServerName()).append("&")
-            .append("extension=").append(data.getExtension())
-            .append(U8SDK.getInstance().getAppKey());
+            .append("extension=").append(data.getExtension());
+    if(!StringUtils.isEmpty(notifyUrl)){
+            sb.append("&notifyUrl=").append(this.notifyUrl);
+    }               
+
+    sb.append(user.getGame().getAppkey());
 
     String encoded = URLEncoder.encode(sb.toString(), "UTF-8");
 
