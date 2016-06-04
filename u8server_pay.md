@@ -80,14 +80,13 @@ http://localhost:8080/pay/uc/payCallback/10 即可。
 通过这个流程，我们可以看到，所有渠道SDK支付头通知到U8Server，再由U8Server来通知到对应的游戏服务器。
 
 
-接口
+渠道SDK支付回调
 ----------
 
 NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这篇文档](u8server_setup.md)，先去搭建U8Server的开发环境。
 
 假如你部署好了U8Server，并且根地址是http://localhost:8080/
 
-1、各个渠道SDK支付回调处理的接口
 
 由于各个渠道SDK支付回调通知的参数和请求方式都不同，所以我们为每个渠道SDK提供单独的回调处理接口。
 
@@ -265,7 +264,8 @@ public class BaiduPayCallbackAction extends UActionSupport{
 
 ```
 
-2、通知回调游戏服
+游戏服务器回调接口
+----------
 
 当U8Server收到渠道SDK支付回调，并处理成功时，我们需要里面调用游戏服的支付回调地址，通知游戏支付成功，让游戏服给玩家发游戏币。
 
