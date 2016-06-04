@@ -40,3 +40,9 @@ def post_process(self, project, infoPlist, sdkparams):
 **91助手在ios9上显示方向错误**
 
 91助手SDK没有适配ios8以上系统，这个问题不影响审核通过，可以无视。。。
+
+其他
+---------
+**没有源码直接用ipa包可以打渠道包吗？**
+
+U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性。不过我们提供了iparepacker工具，可以简单的修改ipa包，这个工具已经开源：https://github.com/uustory/iparepack
