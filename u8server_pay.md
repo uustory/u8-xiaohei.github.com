@@ -80,14 +80,13 @@ http://localhost:8080/pay/uc/payCallback/10 即可。
 通过这个流程，我们可以看到，所有渠道SDK支付头通知到U8Server，再由U8Server来通知到对应的游戏服务器。
 
 
-接口
+渠道SDK支付回调
 ----------
 
 NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这篇文档](u8server_setup.md)，先去搭建U8Server的开发环境。
 
 假如你部署好了U8Server，并且根地址是http://localhost:8080/
 
-1、各个渠道SDK支付回调处理的接口
 
 由于各个渠道SDK支付回调通知的参数和请求方式都不同，所以我们为每个渠道SDK提供单独的回调处理接口。
 
@@ -265,13 +264,14 @@ public class BaiduPayCallbackAction extends UActionSupport{
 
 ```
 
-2、通知回调游戏服
+游戏服务器回调接口
+----------
 
 当U8Server收到渠道SDK支付回调，并处理成功时，我们需要里面调用游戏服的支付回调地址，通知游戏支付成功，让游戏服给玩家发游戏币。
 
 ```
 
-请求地址：游戏服提供，配置在UGame表中payCallbackUrl字段中
+请求地址：游戏服提供，配置在UGame表中payCallbackUrl字段中,也可以在下单的时候，在notifyUrl字段中传。如果下单的时候传了，优先使用下单中传的回调地址。
 请求方式：POST
 请求参数(JSON格式)：
 	{
@@ -286,15 +286,69 @@ public class BaiduPayCallbackAction extends UActionSupport{
 			money:充值金额，单位分
 			currency：货币类型，默认RMB
 			extension：获取订单号服务器传过来的自定义参数，原样返回
+
+            signType：签名类型，目前支持md5和rsa，可以自己设定。 该字段不参与签名
+            sign：签名值。 该字段不参与签名
 		}
-		sign:data数据的rsa签名，RSAUtils.sign(data.toString(),game.getAppRSAPriKey(), "UTF-8")
-		     。游戏服收到这个sign，验证的时候，直接调用RSAUtils.verify(data.toString(),publicKey, "UTF-8");
 	}
 
 返回：
 
 游戏服处理成功，直接返回一个"SUCCESS"字符串到U8Server即可。失败，返回一个"FAIL"字符串。
 
+```
+
+游戏服务器sign验证规则：
+
+首先对收到的data中的数据进行解析， 解析出来之后，除了signType和sign两个字段外， 其他所有的字段按照字母排列顺序进行组合,格式如下：
+
+signStr = "channelID=5&currency=RMB&.....&userID=4344"
+
+组合字符串最后，加上u8server为该游戏分配的SecretKey。 
+
+signStr +=  "&" + SecretKey
+
+这样得到的signStr，就是待校验的数据字符串了。
+
+**如果signType=="md5"，那么就直接这样验证：**
+
+String localSign = md5(signStr)
+if(localSign == sign) return true;
+else return false;
+
+将本地生成的md5和收到的sign进行比对。 一致，则验证通过。  这里md5字符串为 32位小写
+
+**如果signType=="rsa"，则验证方法如下：**
+
+RSAUtils.verify(signStr, publicKey, "UTF-8");
+
+RSAUtils类可以从U8Server代码中获取， publicKey是u8server为该游戏分配的支付公钥。
+
+
+U8Server生成sign的代码，在com.u8.server.web.SendAgent类中，方法如下：
+
+```
+    private static String generateSign(UOrder order, String signType){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("channelID=").append(order.getChannelID()).append("&")
+                .append("currency=").append(order.getCurrency()).append("&")
+                .append("extension=").append(order.getExtension()).append("&")
+                .append("gameID=").append(order.getGame().getAppID()).append("&")
+                .append("money=").append(order.getMoney()).append("&")
+                .append("orderID=").append(order.getOrderID()).append("&")
+                .append("productID=").append(order.getProductID()).append("&")
+                .append("serverID=").append(order.getServerID()).append("&")
+                .append("userID=").append(order.getUserID()).append("&")
+                .append(order.getGame().getAppSecret());
+
+        if("md5".equalsIgnoreCase(signType)){
+            return EncryptUtils.md5(sb.toString()).toLowerCase();
+        }else{
+            return RSAUtils.sign(sb.toString(), order.getGame().getAppRSAPriKey(), "UTF-8");
+        }
+
+    }
 ```
 
 
