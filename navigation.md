@@ -29,6 +29,7 @@
   * [接入新渠道](ios_addchannel.md)
   - - - -  
   * [自定义脚本](ios_script.md)
+  * [常见问题](ios_faq.md)
 
 [接入实例]()
 
