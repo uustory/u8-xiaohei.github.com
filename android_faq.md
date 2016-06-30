@@ -46,6 +46,51 @@ NOTE: 部分渠道SDK有一些特殊的需要注意的地方，这些地方可�
 4、沙箱测试完毕之后，记得将地址改为现网地址https://ysdk.qq.com
 ```
 
+**客户端支付失败**
+```
+1、检查元宝icon是否正确配置
+
+        <channel>
+            <param name="id" value="51" />
+            <param name="name" value="ysdk" />
+            <param name="sdk" value="ysdk" />
+            <param name="desc" value="腾讯应用宝(YSDK)" />
+            <param name="suffix" value="com.tencent.tmgp.sdtx" />
+            <param name="splash" value="0" />
+            <param name="splash_copy_to_unity" value="0" />
+
+            <sdk-params>
+
+                <param name="QQ_APP_ID" value="1105283027" desc="QQAppID"/>
+                <param name="WX_APP_ID"  value="wx5f01cf0f152b4288" desc="微信AppID"/> 
+                <param name="OFFER_ID" value="1105283027" desc="OfferId,一般就是QQ AppId"/>
+
+                <param name="YSDK_URL" value="https://ysdktest.qq.com" desc="沙箱环境是https://ysdktest.qq.com；正式环境是https://ysdk.qq.com"/>
+                <param name="WG_FIXEDPAY" value="true"  desc="是否定额支付 true|false"/> 
+                <param name="WG_RATIO" value="10"  desc="后台配置的比例，如果是1:10，那么填10"/> 
+                <param name="WG_COIN_ICON_NAME" value="coin_icon" desc="支付界面游戏币Icon名称，drawable资源目录下的文件名称，不带后缀"/>    
+
+                <param name="WG_MULTI_SERVERS" value="false" desc="true|false"/>    
+
+                <param name="WG_QUERY_URL" value="http://192.168.18.9:8080/pay/ysdknew/query" desc="u8server处理查询充值逻辑的地址"/>  
+                <param name="WG_PAY_URL" value="http://192.168.18.9:8080/pay/ysdknew/charge" desc="u8server处理查询充值逻辑的地址"/>
+
+            </sdk-params>
+
+            <sdk-version>
+                <versionCode>1</versionCode>   
+                <versionName>1.1.1</versionName>
+            </sdk-version>              
+
+        </channel>
+
+应用宝渠道参数中，有一个WG_COIN_ICON_NAME配置项，用于配置游戏中游戏币的图标名称。
+比如game1中，这里配置的名称是 coin_icon， 那么最终的apk的drawable中，需要有一张coin_icon.png，大小48*48 px
+
+这张图片可以放到 : 打包工具/games/当前游戏/channels/YSDK对应渠道号(game1下是渠道号是51)/res/drawable/coin_icon.png                         
+
+```
+
 **服务器端支付失败**
 ```
 1、检查u8server后台应用宝YSDK的参数配置，appid和appkey分别对应QQ AppID和沙箱的key（正式上线，换为现网key）
