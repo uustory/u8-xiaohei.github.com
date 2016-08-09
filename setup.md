@@ -33,12 +33,16 @@ Windows下主要搭建Android的开发环境，以及U8SDK Android部分的开�
 ><font size=2>[安装指导](http://jingyan.baidu.com/article/19192ad8399a62e53e5707e0.html)</font><br/>
 ><font size=2>安装好python之后，我们还需要安装一个pil图片处理库。关于pil的安装，我们这里重点讲解一下。安装pil的时候，请注意你当前的python版本，32位还是64位。我们这里提供一个简便的安装方法。</font>
 
+Note:**可以把Python安装目录/Scripts目录添加到系统环境变量中**
+
 * 安装easy_install（[下载地址](https://bitbucket.org/pypa/setuptools/downloads)）
 
 ><font size=2>根据你当前使用python版本，下载对应版本的easy_install安装文件。比如，你安装的是32位的python2.7版本。那么你可以下载[setuptools-0.7.win32-py2.7.msi](https://bitbucket.org/pypa/setuptools/downloads/setuptools-0.7.win32-py2.7.msi),然后进行安装即可。</font><br/>
 ><font size=2>安装完easy_install之后，打开命令行，运行[easy_install]命令应该可以看到easy_install命令的相关信息。如果提示“easy_install 不是内部或者外部命令，也不是可运行的程序或批处理文件”，那请检查easy_install是否安装正确。</font>
 
 Note:**如果执行easy_install有错误;可以尝试用 python -m easy_install pip 试试**
+
+Note:**win7 64位必须使用ez_setup.py进行安装。方法是下载[ez_setup.py](http://download.csdn.net/detail/chenjie19891104/9591992)后，在cmd下执行 python ez_setup.py，即可自动安装setuptools。目前没有直接的exe安装版本。**
 
 * 安装 pip
 
