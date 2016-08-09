@@ -47,6 +47,6 @@ def post_process(self, project, infoPlist, sdkparams):
 
 U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性。不过我们提供了iparepacker工具，可以简单的修改ipa包，这个工具已经开源：https://github.com/uustory/iparepack
 
-**编译报错error: no provisioning profile matches 'XC Ad Hoc: *'**
+**编译报错error: no provisioning profile matches 'XC Ad Hoc: \*'**
 
 在common/config.json中修改provision字段，改为苹果开发者帐号里的provision的名字。
