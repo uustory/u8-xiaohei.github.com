@@ -262,13 +262,13 @@ U8SDK.getInstance().runOnMainThread(new Runnable() {
 
 所以如果要调用该接口，可以先判断当前渠道是否支持登出操作：
 
-if(U8User.getInstance().isSupport("switchLogin")) {
+if(U8User.getInstance().isSupport("logout")) {
  
   U8SDK.getInstance().runOnMainThread(new Runnable() {
     
     @Override
     public void run() {
-      U8User.getInstance().switchLogin();
+      U8User.getInstance().logout();
     }
   });
  
