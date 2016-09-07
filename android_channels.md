@@ -241,7 +241,9 @@ PayID：游龙提供的key
 应用宝(YSDK)
 ------
 AppID: 应用宝提供的 QQ AppID
-AppKey: 应用宝提供的 沙箱KEY（上线切换到现网的时候，换成现网KEY）
+AppKey：应用宝提供的QQ AppKey
+AppSecret：应用宝提供的微信 AppKey
+PayID: 应用宝提供的 沙箱KEY（上线切换到现网的时候，换成现网KEY）
 特殊配置： 设置为后台设置的支付比例（一般默认是10，一元对应10游戏币）
 
 
