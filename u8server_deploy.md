@@ -5,6 +5,23 @@ NOTE:U8Server采用java web标准框架J2EE开发，所以，理论上，任何�
 
 使用Tomcat的话，建议使用Tomcat7，Tomcat7要求使用jdk1.7以上版本
 
+编码设置
+---------
+
+U8Server中，从数据库，到代码，到配置文件，所有都使用utf8编码格式， 为了http协议解析也使用utf8编码，我们需要将Tomcat的编码格式设置为utf8
+
+Tomcat安装目录conf/server.xml文件中，找到相应的端口(默认是8080)的Connector的配置项。加上一个URIEncoding="UTF-8"，协议提交的数据编码格式就是utf8了
+
+配置之后，这条配置如下：
+
+```
+    <Connector port="8000" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" 
+               URIEncoding="UTF-8"/>
+```
+
+
 预备知识
 ---------
 
