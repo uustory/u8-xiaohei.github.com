@@ -63,6 +63,8 @@ sdk-check-update.bat：检查当前有更新的SDK，并更新
 		<param name="appDesc" value="测试游戏1" desc="当前游戏的中文名称"/>
 		<param name="orientation" value="landscape" desc="游戏是横屏还是竖屏(landscape|portrait),不配置默认是横屏" />
 		<param name="cpuSupport" value="armeabi|armeabi-v7a" desc="当前游戏支持的cpu类型"/>
+		<param name="use_u8_auth" value="1" desc="是否用U8SDK默认的登录认证" />
+		<param name="u8_auth_url" value="http://192.168.18.9:8080/user/getToken" desc="如果这里配置了登录认证地址，那么会覆盖local.properties中配置的登录认证地址"/>		
 		<param name="versionCode" value="15" desc="游戏包的版本号,对应AndroidManifest.xml中的versionCode"/>
 		<param name="versionName" value="2.8.5" desc="游戏包中的版本名称,对应AndroidManifest.xml中的versionName"/>
 		<param name="minSdkVersion" value="8" desc="最小支持的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
@@ -106,6 +108,7 @@ OK，到这里，你就可以执行package.bat，按照提示，选择你当前�
 		<param name="icon" value="rb" />
 		<param name="gameName" value="大话西游" />
 		<param name="signApk" value="0" />
+		<param name="extraR" value="com.ali.uc" />
 
 		<sdk-params>
 			<param name="UCGameId" value="544156" desc="GameId"/>
@@ -135,6 +138,7 @@ splash_copy_to_unity:拷贝闪屏到Unity默认闪屏（Unity工程项目适用�
 icon:是否处理角标，角标位置是rb（right-bottom）具体类型详情，可以看[这篇博客](http://www.uustory.com/?p=1778)
 gameName:如果渠道包的游戏名称特殊，可以配置这里，将覆盖母包的游戏名称
 signApk:是否对最终的apk包进行签名。默认是签名的，如果不需要签名，则设置为0
+extraR:是否需要在其他的包名下面生成R.java，多个包名，用逗号分割(一般用于海外渠道)
 sdk-version:用于和u8server对比使用的版本
 sdk-params:当前渠道的参数配置
 plugins:当前渠道支持的插件

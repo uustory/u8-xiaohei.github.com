@@ -331,6 +331,8 @@ U8User.getInstance().submitExtraData(UserExtraData extraData)
 | roleName| String | 玩家角色名称|
 | roleLevel| String | 玩家角色等级|
 | moneyNum| String | 当前角色身上拥有的游戏币数量|
+| roleCreateTime| long | 角色创建时间，从1970年到现在的时间，单位秒,必须传入真实的数据，否则UC审核不过|
+| roleLevelUpTime| long | 角色等级变化时间，从1970年到现在的时间，单位秒|
 
 
 6) SDK的退出游戏确认框(必须实现)
