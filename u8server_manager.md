@@ -6,7 +6,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 假设你的U8Server根地址为: http://localhost:8080/，那么后台管理系统入口为http://localhost:8080/admin/login
 
 
-U8Server后台管理系统，在线演示地址：[U8Server演示地址](http://xzy.u8sdk.com:8080/u8server/admin/login)
+U8Server后台管理系统，在线演示地址：[U8Server演示地址](http://121.42.144.254:8080/u8server_u/admin/index)
 用户名和密码：u8sdk/u8sdk
 
 

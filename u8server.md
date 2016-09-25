@@ -1,16 +1,21 @@
 U8Server
 ==========
 
-NOTE:U8Server是统一的渠道SDK登录认证中心和支付中心，是U8SDK统一接入框架中，不可缺少的一部分。目前，U8Server已经支持了20多家渠道SDK，并且已经开源，开源地址：[github](https://github.com/u8-xiaohei/U8Server)
+NOTE:U8Server是统一的渠道SDK登录认证中心和支付中心，是U8SDK统一接入框架中，不可缺少的一部分。目前，U8Server已经支持了50多家渠道SDK，并且提供开源版本，开源地址：[github](https://github.com/u8-xiaohei/U8Server)
 
-U8Server后台管理系统，在线演示地址：[U8Server演示地址](http://xzy.u8sdk.com:8080/u8server/admin/login)
+U8Server后台管理系统，在线演示地址：[U8Server演示地址](http://121.42.144.254:8080/u8server_u/admin/index)
 用户名和密码：u8sdk/u8sdk
+
+U8Server企业版后台管理系统，在线演示地址：[U8Server演示地址](http://121.42.144.254:8080/u8server/admin/index)
+用户名和密码：admin/u8sdk
+
 
 开源地址
 ----------
 
 U8Server开源地址：[github](https://github.com/u8-xiaohei/U8Server)
 视频教程(U8Server):[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)
+企业版和开源版本的主要区别，企业版后台管理系统中，增加了权限管理，完善了数据查询，增加了数据统计分析功能。 SDK登录认证和支付回调，开源版本和企业版完全相同
 
 简介
 ----------
@@ -47,6 +52,8 @@ U8Server数据存储采用数据库，所以，你需要选择一个数据库，
 ---------
 
 U8Server目前已经接好的渠道如下，后续我们还会不断地继续支持更多的渠道SDK，敬请期待......
+
+Android：
 
 序号 | 名称 | 开放平台 | 地址
 -----|------|----------|------
@@ -90,6 +97,22 @@ U8Server目前已经接好的渠道如下，后续我们还会不断地继续支
 38|楚游|武汉楚游（07073）|http://www.07073.com/
 39|PPS|PPS|http://g.pps.tv/
 40|PPTV|PPTV|http://g.pptv.com/
+
+iOS：
+
+序号 | 名称 | 开放平台 | 地址
+-----|------|----------|------
+1|AppStore| 苹果开发者中心 |https://developer.apple.com/
+2|iTools|iTools开发者平台|http://open.itools.cn/
+3|PP助手|PP助手移动开放平台|http://dev.pp.cn/
+4|同步推| 同步开发者中心|http://dev.tongbu.com/
+5|i4（爱思助手）|爱思助手开发者平台|https://dev.i4.cn/
+6|XX助手(和Android同样的处理类)|叉叉助手开发者平台|http://dev.xxzhushou.cn/
+7|XY助手|XY苹果助手|http://dev.xyzs.com/dev/Help/detail/17308.html
+8|快用(7659)|7659开放平台|http://open.7659.com/
+9|海马玩|海马玩游戏中心|http://pay.haima.me/index.php
+10|乐8|乐8游戏中心|http://www.le890.com/
+
 
 特征问题
 ---------
