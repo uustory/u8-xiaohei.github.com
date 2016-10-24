@@ -50,3 +50,7 @@ U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性
 **编译报错error: no provisioning profile matches 'XC Ad Hoc: \*'**
 
 在common/config.json中修改provision字段，改为苹果开发者帐号里的provision的名字。
+
+**xcodebuild: error: The project named "U8SDKDemo" does not contain a scheme named "U8SDKDemo". The "-list" option can be used to find the names of the schemes in the project.**
+
+母工程的scheme名称跟target名称不一致，需要用xcode打开母工程， 打开Manage Schemes， 重新生成Scheme
