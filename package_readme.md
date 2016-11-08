@@ -396,13 +396,13 @@ NOTE:iOS打包工具根目录为U8SDKTools-ipa,打包工具和android平台打�
 ```
 buildscript: 打包脚本源码目录
 Core: U8SDK抽象层框架工程目录
-iparepacker:仅仅渠道号不同的ipa包，打包工具。（CPS包）
 Plugins:所有渠道SDK接入工程目录
-workspace:测试游戏工作目录
+u8test:测试游戏工作目录
 	---common:该游戏通用配置目录
 	---channels:当前游戏中各个渠道SDK的配置
-	---projects:打包生成的临时工程目录
 	---release:最终渠道包的存放位置
+	---U8SDKDemo:测试游戏母工程
+	---src:测试游戏代码
 ```
 
 **2、游戏目录的配置**
@@ -450,9 +450,9 @@ NOTE:部分渠道没有角标要求，我们可以直接将游戏的ICON放在�
 	"provision":"iOSTeam Provisioning Profile: *",
 	"U8SDK": {
 		"AppId": 1,
-		"AppKey": "f32fdc02123a82524eb4ea95e1383d0b"
-	},
-	"U8Url": "http://127.0.0.1:8080/getToken"
+		"AppKey": "f32fdc02123a82524eb4ea95e1383d0b",
+		"U8Url": "http://192.168.19.6:8080/u8server"
+	}
 }
 
 product_name：当前游戏名称
@@ -460,7 +460,7 @@ provision：当前游戏打包使用的provision
 U8SDK：这里配置U8SDK的配置数据：
 	---AppId:U8Server(或者你们服务器)分配给当前游戏的appID
 	---AppKey:U8Server(或者你们服务器分配给当前游戏的AppKey)
-U8Url：登录认证的服务器地址(U8Server地址或者你们自己服务器用于渠道登录认证的地址)
+	---U8Url：登录认证的服务器地址(U8Server地址或者你们自己服务器用于渠道登录认证的地址)
 
 ```
 

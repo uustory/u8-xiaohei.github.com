@@ -103,11 +103,11 @@ Note:iOS平台的打包工具，只能在mac下进行打包。打包工具根目
 启动一个终端，切到打包工具根目录U8SDKTools-ipa，执行如下命令
 
 ```
-./buildscript/build.py game1/U8SDKDemoForIOS/U8SDKDemoForIOS.xcodeproj/ game1/
+./buildscript/build.py u8test/U8SDKDemo/U8SDKDemo.xcodeproj/ u8test/
 
 其中，
-game1为当前游戏工作目录;
-U8SDKDemoForIOS为母工程(Android中我们是母包，iOS我们是母工程，也就是一个xcode工程)
+u8test为当前游戏工作目录;
+U8SDKDemo为母工程(Android中我们是母包，iOS我们是母工程，也就是一个xcode工程)
 
 ```
 
@@ -126,9 +126,9 @@ U8SDKDemoForIOS为母工程(Android中我们是母包，iOS我们是母工程，
 
 Note:打包必须指定母工程位置和当前游戏的工作目录。各个渠道打包的时候，会在指定的游戏工作目录/projects下，生成各个渠道处理后的工程，比如要打出appstore的包，但是我们不能用打包命令打包，我们就先用命令：
 
-./buildscript/build.py game1/U8SDKDemoForIOS/U8SDKDemoForIOS.xcodeproj/ game1/ -n 仅仅处理appstore渠道的xcode工程的配置。
+./buildscript/build.py u8test/U8SDKDemo/U8SDKDemo.xcodeproj/ u8test/ -n 仅仅处理appstore渠道的xcode工程的配置。
 
-然后我们用xcode打开projects/U8SDKDemoForIOS.appstore工程，进行Achive操作，生成Achive文件，并上传Appstore。
+然后我们用xcode打开u8test/U8SDKDemo.appstore工程，进行Achive操作，生成Achive文件，并上传Appstore。
 
 ```
 
@@ -138,7 +138,7 @@ iOS平台的打包原理是使用xcode自带的命令工具，同时结合python
 所谓母工程，指的是：接入了U8SDK抽象层的游戏工程(xcode工程)
 
 ```
-U8SDK iOS平台打包工具的配置方式，和Android不太一样，我们采用了更加灵魂和简单的方式，直接在打包命令中指定当前需要打包的游戏母工程和工作目录。
+U8SDK iOS平台打包工具的配置方式，和Android不太一样，我们采用了更加灵活和简单的方式，直接在打包命令中指定当前需要打包的游戏母工程和工作目录。
 
 所以打包之前，你需要在打包工具根目录下，或者其他任意地方，建立一个游戏工作目录，比如，我们在打包工具根目录下新建一个u8test目录，然后，有两个子目录是必须的，一个是common,一个是channels，建议从已有的其他游戏工作目录中进行拷贝。
 
@@ -149,7 +149,7 @@ xcode母工程中，我们有以下约定：
 母工程中，需要引用U8SDK抽象层，同时将libU8SDK.a静态库添加到出包的target的Build Phases中的[Link Binary With Libraries]中
 母工程中，可能要添加系统库：SystemConfiguration.framework,libz.dylib,libc++.dylib
 
-然后，我们这里将母工程放到u8test目录下(也可以任意目录，打包命令中指定)。这样，我们就准备好了当前游戏的母工程和工作目录了。
+然后，我们这里将母工程放到u8test目录下,母工程的名称为U8SDKDemoForIOS(也可以任意目录，打包命令中指定)。这样，我们就准备好了当前游戏的母工程和工作目录了。
 ```
 
 **3、打包过程**
