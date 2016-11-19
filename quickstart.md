@@ -311,6 +311,9 @@ Note: 部分渠道要求在 选择服务器，创建角色，登录游戏，角�
 3：进入游戏
 4：等级提升
 5：退出游戏
+6: 进入副本
+7：退出副本
+8: VIP等级提升
 
 所以在上面5个地方，都需要调用
 U8User.getInstance().submitExtraData(UserExtraData extraData)
@@ -333,6 +336,7 @@ U8User.getInstance().submitExtraData(UserExtraData extraData)
 | moneyNum| String | 当前角色身上拥有的游戏币数量|
 | roleCreateTime| long | 角色创建时间，从1970年到现在的时间，单位秒,必须传入真实的数据，否则UC审核不过|
 | roleLevelUpTime| long | 角色等级变化时间，从1970年到现在的时间，单位秒|
+| vip| String | 玩家VIP等级|
 
 
 6) SDK的退出游戏确认框(必须实现)

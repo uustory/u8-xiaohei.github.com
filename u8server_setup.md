@@ -56,86 +56,24 @@ java web开发环境
 
 去Intellij IDEA官方网站下载最新版本的IDEA进行安装，注意，我们要选择［Ultimate Edition］版本，因为只有这个版本，是支持Java Web开发的。另一个［Community Edition］功能有限，不支持Java Web开发。如果是windows用户，请下载windows版本；如果是mac用户，请下载mac版本。
 
-[下载地址](http://www.jetbrains.com/idea/download/)
+[Windows版本(32位或者64位)下载地址](http://download.jetbrains.com/idea/ideaIU-14.0.5.exe)
+[MAC版本](http://download.jetbrains.com/idea/ideaIU-14.0.5.dmg)
 
 **5、准备 U8Server**
 
-新建一个文件夹(U8Server2)，然后从U8Server的github远程分支上clone下来到这个目录。启动终端，执行：
+新建一个文件夹(U8Server)，然后从U8Server的github远程分支上clone下来到这个目录。启动终端，执行：
 
 ```
 git clone https://github.com/u8-xiaohei/U8Server.git
 
 ```
 
-然后，我们打开IDEA，选择打开工程，打开刚刚clone下来的U8Server工程：
+**6、配置U8Server开发环境**
 
-![](images/u8server_open.png)
+这部分有些细节， 请根据视频教程一步步来走：
 
-打开之后，我们看到如下结构：
+视频教程地址:[U8Server视频教程](http://www.chuanke.com/2869716-164072.html)
 
-![](images/u8server_opened.png)
-
-
-环境配置
---------
-
-NOTE:为了能够在IDEA中，直接运行并发布U8Server到Tomcat中，我们需要在IDEA中集成Tomcat。同时，我们需要对工程做一些设置，使得我们可以顺利地完成发布
-
-在菜单File中，选择［Project Structure］打开该工程的配置。然后接下来，我们所有的配置都在这里：
-
-![](images/u8server_setup1.png)
-
-1、在这里指定刚刚安装的jdk
-2、这里设置该工程编译和发布目录，我们这里指定到工程目录/output
-
-![](images/u8server_setup2.png)
-
-1、点击sources
-2、选中src目录
-3、点击Sources，这个可以看到右边红线标注的地方，src被标注为了Source Folder。同时，src文件夹的颜色也变了
-4、点击Apply应用
-
-![](images/u8server_setup3.png)
-
-1、点击Libraries，我们要添加依赖的库文件
-2、点击＋号，选择java，然后定位到U8Server2/lib/jars目录下，我们有四个子目录：
-	hibernate：hibernate的依赖库
-	spring：spring的依赖库
-	struts2：struts2的依赖库
-	sdk：其他相关的需要的第三方库文件
-
-我们需要将这四个子目录都添加进来。添加进来的时候，他会弹出一个弹窗，让你选择将当前的库添加到哪个modules中，直接默认确定即可。
-3、点击Apply应用
-
-![](images/u8server_setup4.png)
-
-1、点击Modules
-2、点击Dependencies标签
-3、选中我们刚刚添加进来的四个库
-4、同时，需要注意Module SDK这里，需要指定选择为我们添加进来的jdk版本
-5、点击Apply应用
-
-![](images/u8server_setup5.png)
-
-1、点击Facet
-2、点击＋，选择Web，创建一个Web的Facet，弹出的选择所属的Modules时，默认选择确定即可
-3、修改Path，默认生成的Path是.idea目录下的，我们直接使用工程目录下的，所以选中，然后点击下面编辑的按钮，将.idea目录去掉
-4、默认的Web Resource Directory也是.idea目录下的，我们将.idea目录去掉
-5、下面有一个警告，说web资源没有饱含在artifact中，我们直接点击Create Artifact即可。
-6、点击Apply应用
-
-![](images/u8server_setup6.png)
-
-1、刚刚第五步Create Artifact之后，立马就会跳转到Artifact面板，我们需要设置一下，细心一点，可以看到左边Problems显示有四个问题。
-2、选中 U8Server:Web exploded (默认应该就选中)，如果你这里没有这个，可以通过＋来手动添加
-3、我们直接点击fix，因为有4个错误，所以我们选择Add all missing.....直接将4个库的编译输出到工程的输出目录
-4、点击Apply应用
-
-完成后如下：
-
-![](images/u8server_setup7.png)
-
-OK，到这里，我们该工程的环境配置就完成了。
 
 Tomcat集成
 --------------
@@ -175,7 +113,7 @@ U8Server的数据存储在数据库，我们之前已经安装好了MySQL，我�
 1、我们首先创建一个数据库用户，并设置密码。比如我们都设置为u8server
 2、我们创建一个新的数据库，名为udb
 3、然后在该数据库上进行导入我们的udb.sql，这里有各个表结构和测试数据
-4、进入IDEA中，找到src目录下的jdbc.properties文件，打开：
+4、进入IDEA中，找到src/main/resources/目录下的jdbc.properties文件，打开：
 
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/udb
@@ -190,20 +128,5 @@ hibernate.current_session_context_class=thread
 ```
 
 好了，到这里，整个环境就搭建好了，可以在IDEA中，Run 'U8Server' 或者 Debug 'U8Server'启动看看了。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
