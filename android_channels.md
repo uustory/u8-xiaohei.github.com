@@ -246,6 +246,66 @@ AppSecret：应用宝提供的微信 AppKey
 PayID: 应用宝提供的 沙箱KEY（上线切换到现网的时候，换成现网KEY）
 特殊配置： 设置为后台设置的支付比例（一般默认是10，一元对应10游戏币）
 
+搜狗
+------
+AppID：搜狗提供的 gid
+AppSecret：搜狗提供的App-Secret
+PayID：搜狗提供的payKey
+
+全民助手
+------
+CpID：对方提供的DevCode
+AppKey：对方提供的AppKey
+
+虫虫游戏
+------
+AppSecret：虫虫提供的密钥
+
+夜神模拟器
+------
+AppID：夜神提供的AppID
+AppKey：夜神提供的AppKey
+
+朋友玩
+------
+AppSecret：朋友玩提供的密钥
+
+靠谱助手
+------
+AppSecret：靠谱提供的密钥
+
+啪啪游戏厅
+------
+AppKey：啪啪提供的AppKey
+AppSecret：啪啪提供的密钥
+
+TT语音
+------
+AppID：TT提供的AppID
+AppSecret：TT提供的SDK交互密钥
+PayPublicKey：TT提供的充值密钥
+
+宴门
+------
+AppKey：对方提供的AppKey
+
+小七手游
+------
+AppKey：对方提供的AppKey
+PayPublicKey：对方提供的RSA公钥
+
+16WIFI
+------
+PayPublicKey：对方提供的支付密钥
+
+手游村
+------
+AppID：对方提供的App_ID
+AppKey：对方提供的App_Key
+
+
+
+
 
 
 
