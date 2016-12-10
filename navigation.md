@@ -32,6 +32,8 @@
   * [自定义脚本](ios_script.md)
   * [常见问题](ios_faq.md)
 
+[渠道列表](channel_supports.md)
+
 [接入实例]()
 
   * [原生平台](android_demo.md)
