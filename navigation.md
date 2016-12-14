@@ -14,6 +14,9 @@
 
 [Android文档]()
 
+  * [游戏接入指南](android_game_doc.md)
+  * [游戏Application](android_custom_application.md)
+  - - - -
   * [接入新渠道](android_addchannel.md)
   * [新渠道配置](android_package.md)  
   - - - -
