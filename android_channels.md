@@ -28,280 +28,339 @@ NOTE:UChannel中预设了8个字段来配置渠道参数。 每个渠道的参�
 下面就当前U8Server当前支持的所有渠道的参数配置在哪些预设字段中进行一个说明
 
 
-安峰
--------
+Android渠道
+------
+
+**安峰**
+
 AppID：安峰提供的游戏数字ID
 AppKey：安峰提供的签名密钥
 
-安智
--------
+**安智**
+
 AppKey: 安智提供的AppKey
 AppSecret：安智提供的AppSecret
 
-应用汇(AppChina)
-------
+**应用汇(AppChina)**
+
 AppID: 应用汇提供的登录ID(LoginID)
 AppKey: 应用汇提供的登录Key(LoginKey)
 PayID:  应用汇提供的appid
 PayPublicKey:  应用汇提供的publicKey
 
-百度
-------
+**百度**
+
 AppID: 百度提供的App ID
 AppKey：百度提供的App Key
 AppSecret：百度提供的Secret Key
 
-武汉楚游(07073)
-------
+**武汉楚游(07073)**
+
 CPID: 楚游提供的 pid
 AppID: 楚游提供的 gameid
 AppKey: 楚游提供的 key
 
-友游(CloudPoint)
-------
+**友游(CloudPoint)**
+
 AppID: 友游提供的 appid
 AppKey: 友游提供的 appkey
 
-酷派(CoolPad)
-------
+**酷派(CoolPad)**
+
 AppID: 酷派提供的 APP ID
 AppKey: 酷派提供的 appkey
 PayPublicKey: 酷派提供的 平台公钥
 PayPrivateKey: 酷派提供的 平台私钥
 特殊配置：酷派后台添加的一条应用内传入价格(开放价格)类型的商品的ID，一般是数字1。可以去酷派后台查看
 
-逗逗SDK(盛大)
-------
+**逗逗SDK(盛大)**
+
 AppID: 逗逗提供的APPID
 AppSecret: 逗逗提供的密钥
 
-当乐(downjoy)
-------
+**当乐(downjoy)**
+
 AppID: 当乐提供的应用ID(App_ID)
 AppKey: 当乐提供的应用密钥(APP_KEY)
 PayPublicKey: 当乐提供的支付密钥(PAYMENT_KEY)
 
-机锋(gfan)
-------
+**机锋(gfan)**
+
 CPID：机锋提供的开发者ID
 AppKey: 机锋提供的支付Key
 
-查查助手(果盘)
-------
+**叉叉助手(果盘)**
+
 AppID：果盘提供的应用编号(APP ID)
 AppSecret: 果盘提供的server secret key
 
-海马玩(iOS渠道)
-------
+**海马玩(iOS渠道)**
+
 AppID：海马玩提供的APP_ID
 AppKey: 海马玩提供的APP_KEY
 
-华为
-------
+**华为**
+
 AppID: 华为提供的App ID
 AppSecret: 华为提供的APP SECRET
 PayID：华为提供的支付ID
 PayPublicKey: 华为提供的支付公钥
 PayPrivateKey: 华为提供的支付私钥
 
-金立
-------
+**金立**
+
 AppKey: 金立提供的APIKey
 AppSecret: 金立提供的SecretKey
 PayPublicKey: 金立提供的支付公钥
 PayPrivateKey: 金立提供的支付私钥
 
-酷狗
-------
+**酷狗**
+
 AppSecret: 酷狗提供的充值密钥（注意，不是客户端用的AppKey，是充值使用的密钥）
 
-乐嗨嗨
-------
+**乐嗨嗨**
+
 AppID: 乐嗨嗨提供的pid
 AppSecret: 乐嗨嗨提供的secretKey
 
-联想
-------
+**联想**
+
 AppID: 联想提供的Open AppId
 PayPrivateKey: 联想提供的支付密钥
 
-乐视
-------
+**乐视**
+
 AppID: 乐视提供的AppId
 AppSecret: 乐视提供的SecretKey（商户密钥）
 
-乐玩
-------
+**乐玩**
+
 AppID: 乐玩提供的gameId
 PayPublicKey: 乐玩提供的支付公钥
 PayPrivateKey: 乐玩提供的支付私钥
 
-猎宝游戏
-------
+**猎宝游戏**
+
 AppKey: 猎宝提供的appkey
 
-4399
-------
+**4399**
+
 AppKey: 4399提供的App key
 AppSecret: 4399提供的App Secret
 
-魅族
-------
+**魅族**
+
 AppID: 魅族提供的AppID
 AppSecret: 魅族提供的AppSecret
 
-免商店(蜗牛)
-------
+**免商店(蜗牛)**
+
 AppID：蜗牛提供的APP_ID
 AppKey：蜗牛提供的API Key
 
-木蚂蚁
-------
+**木蚂蚁**
 
 NOTE:(注意：支付回调数据返回格式，让木蚂蚁的人，设置为json格式)
 
 AppKey: 木蚂蚁提供的应用Key
 
-拇指玩
-------
+**拇指玩**
+
 AppKey: 拇指玩提供的APPKEY
 AppSecret: 拇指玩提供的支付密钥（应用密钥）
 
-Oppo
-------
+**Oppo**
+
 AppKey: Oppo提供的AppKey
 AppSecret: Oppo提供的AppSecret
 PayPublicKey: Oppo提供的支付公钥（可能在他提供的文档中[可币支付回调公钥.txt]）
 
-偶玩
-------
+**偶玩**
+
 AppSecret: 偶玩提供的server_secret
 
-泡椒网
-------
+**泡椒网**
+
 AppID: 泡椒网提供的appId
 AppKey: 泡椒网提供的appKey
 
-(爱奇异)PPS
-------
+**(爱奇异)PPS**
+
 AppKey: 爱奇异提供的APP_KEY
 AppSecret: 爱奇异提供的APP_SECRET
 
-PPTV
-------
+**PPTV**
+
 AppSecret: PPTV提供的支付key
 
-奇虎360
-------
+**奇虎360**
+
 AppSecret: 奇虎360提供的appsecret
 
-趣游
-------
+**趣游**
+
 AppKey:趣联提供的appkey
 AppSecret:趣联提供的secret
 
-搜狗SDK
-------
+**搜狗SDK**
+
 AppID:搜狗提供的gid
 AppKey:搜狗提供的App-Key
 AppSecret: 搜狗提供的App-Secret
 PayID:搜狗提供的payKey
 
-九游（UC）
-------
+**九游（UC）**
+
 AppID: 九游提供的gameID
 AppKey:九游提供的Apikey
 
-VIVO
-------
+**VIVO**
+
 CPID: vivo提供的Cp-ID
 AppID: vivo提供的App-ID
 AppKey: vivo提供的Cp-key
 
-豌豆荚
-------
+**豌豆荚**
+
 AppKey: 豌豆荚提供的AppKey ID
 PayPublicKey: 豌豆荚提供的支付公钥
 
-小米
-------
+**小米**
+
 AppID: 小米提供的AppID
 AppSecret: 小米提供的AppSecret
 
-优酷
-------
+**优酷**
+
 AppKey: 优酷提供的APPKEY
 PayID: 优酷提供的支付key
 
-游龙
-------
+**游龙**
+
 AppID：游龙提供的pid
 PayID：游龙提供的key
 
-应用宝(YSDK)
-------
+**应用宝(YSDK)**
+
 AppID: 应用宝提供的 QQ AppID
 AppKey：应用宝提供的QQ AppKey
 AppSecret：应用宝提供的微信 AppKey
 PayID: 应用宝提供的 沙箱KEY（上线切换到现网的时候，换成现网KEY）
 特殊配置： 设置为后台设置的支付比例（一般默认是10，一元对应10游戏币）
 
-搜狗
-------
+**搜狗**
+
 AppID：搜狗提供的 gid
 AppSecret：搜狗提供的App-Secret
 PayID：搜狗提供的payKey
 
-全民助手
-------
+**全民助手**
+
 CpID：对方提供的DevCode
 AppKey：对方提供的AppKey
 
-虫虫游戏
-------
+**虫虫游戏**
+
 AppSecret：虫虫提供的密钥
 
-夜神模拟器
-------
+**夜神模拟器**
+
 AppID：夜神提供的AppID
 AppKey：夜神提供的AppKey
 
-朋友玩
-------
+**朋友玩**
+
 AppSecret：朋友玩提供的密钥
 
-靠谱助手
-------
+**靠谱助手**
+
 AppSecret：靠谱提供的密钥
 
-啪啪游戏厅
-------
+**啪啪游戏厅**
+
 AppKey：啪啪提供的AppKey
 AppSecret：啪啪提供的密钥
 
-TT语音
-------
+**TT语音**
+
 AppID：TT提供的AppID
 AppSecret：TT提供的SDK交互密钥
 PayPublicKey：TT提供的充值密钥
 
-宴门
-------
+**宴门**
+
 AppKey：对方提供的AppKey
 
-小七手游
-------
+**小七手游**
+
 AppKey：对方提供的AppKey
 PayPublicKey：对方提供的RSA公钥
 
-16WIFI
-------
+**16WIFI**
+
 PayPublicKey：对方提供的支付密钥
 
-手游村
-------
+**手游村**
+
 AppID：对方提供的App_ID
 AppKey：对方提供的App_Key
+
+
+iOS渠道
+------
+
+**91助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**AppStore**
+
+无需配置
+
+**海马玩**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**iTools**
+
+AppID：对方提供的AppID
+PayPublicKey：对方提供的解密公钥
+
+**快用**
+
+AppKey：对方提供的AppKey
+PayPublicKey：对方提供的公钥
+
+**泡椒**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**PP助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+PayPublicKey：对方提供的公钥
+
+**同步推**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**叉叉助手(果盘)**
+
+AppID：果盘提供的应用编号(APP ID)
+AppSecret: 果盘提供的server secret key
+
+**XY助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+AppPublicKey：对方提供的支付密钥
+
+
 
 
 
