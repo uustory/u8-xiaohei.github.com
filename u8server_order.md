@@ -97,14 +97,10 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 ```
 sign 签名算法：
 
-    private static String generateSign(String userID, PayParams data, String notifyUrl) throws UnsupportedEncodingException {
-
-        //U8Server后台游戏管理中为游戏分配的SecretKey和PrivateKey
-        String secretKey = "7513a2c235647e3213538c6eb329eec9";
-        String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAO0m9rBaOFCEj4ncScPeC+6H63XMHhs4xb08lR2TbthAPKIZV3jZB0cuh91M3XJcpdhlHUGbLhbWlmG5xKgN1Lt8Z+QoebfNEyyKM06I9YeDSykwRyEjhhOUgLjeIVV3NI8T/awhl+tb/0yyld+5aoXJKxOx/pzqolzoDRs0omEzAgMBAAECgYBGzwt5PHb0E6CIGS4tPW9ymULEuV2D4z+ncR9U5WCDUSrJe6eSfbqellYazYiRTPh31DkYDa2FRC1CoKUHSJnrjeNR2TMw0WUBFvNcqYe2qOJZg3iOhyUDhIChhQiWWC9VrzAvqSU6tuyKGMy5rAWbfTneEnL7NHsTgRRDC+0JAQJBAPlRGW6T4TnRBtbOpRcMU+jdCyJAK3zwuRO13alhexDLq105D1osg2uP1d3+XvTQudwCGo1qRfBSp/W72fynz5kCQQDzgmLyxGzO1rugtJNMLQTqsRGg8ZUoUPmsEVGbmnHwRzd2OGHWbT1JuIEEb+ivrZV3PfeEObv7fDAT6qIhyiarAkAcd4ka2iG+U0KfpkqtXgf6r7qEt6T/iBDp0js0CuBdY5P2efxpxGlhD7RQu6ml9Gs0Vr0nZnoD3bw1z7QtKBAJAkBiqBjesqZCxs0NtxtWaYbsbwDta/M6elQtWnbtzA0NhEz8IKvC7E9AZvgejBiB1JoRzZFSiPGYWiBAcXduqTAxAkEAqG24ePhjesKoF1Us2ViqgJC7zDd96v+LI5eausw3TfKjO4jj5oMoQiyc+hZFxHYlkyZRfA6XEraF1Rdgngf65w==";
+    private static String generateSign(UToken token, PayParams data) throws UnsupportedEncodingException {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("userID=").append(userID).append("&")
+        sb.append("userID=").append(token.getUserID()).append("&")
                 .append("productID=").append(data.getProductId()).append("&")
                 .append("productName=").append(data.getProductName()).append("&")
                 .append("productDesc=").append(data.getProductDesc()).append("&")
@@ -114,23 +110,32 @@ sign 签名算法：
                 .append("serverID=").append(data.getServerId()).append("&")
                 .append("serverName=").append(data.getServerName()).append("&")
                 .append("extension=").append(data.getExtension());
-
-        if(!StringUtils.isEmpty(notifyUrl)){
-            sb.append("&notifyUrl=").append(notifyUrl);
+        
+        //这里是游戏服务器自己的支付回调地址，可以在下单的时候， 传给u8server。
+        //u8server 支付成功之后， 会优先回调这个地址。 如果不传， 则需要在u8server后台游戏管理中配置游戏服务器的支付回调地址
+        //如果传notifyUrl，则notifyUrl参与签名
+        if(data.getPayNotifyUrl() != null){
+            sb.append("&notifyUrl=").append(data.getPayNotifyUrl());
         }
+        
+        sb.append(U8SDK.getInstance().getAppKey());
+        
+        String encoded = URLEncoder.encode(sb.toString(), "UTF-8"); //url encode
 
-        sb.append("&"+secretKey);
+        Log.d("U8SDK", "The encoded getOrderID sign is "+encoded);
 
-        String encoded = URLEncoder.encode(sb.toString(), "UTF-8");
-
-        if("md5".equalsIgnoreCase(signType)){
-            return EncryptUtils.md5(encoded).toLowerCase();
-        }
-
-        return RSAUtils.sign(encoded, privateKey, "UTF-8");
+        //这里用md5方式生成sign
+        String sign = EncryptUtils.md5(encoded).toLowerCase();
+        
+        //如果签名方式是RSA，走下面方式
+        //String privateKey = U8SDK.getInstance().getPayPrivateKey();
+        //String sign = RSAUtils.sign(encoded, privateKey, "UTF-8", "SHA1withRSA");
+        
+        Log.d("U8SDK", "The getOrderID sign is "+sign);
+        
+        return sign;
 
     }
-
 
 sign 验证算法(验证使用的公钥是U8Server创建游戏的时候生成的)：
 
@@ -139,36 +144,42 @@ sign 验证算法(验证使用的公钥是U8Server创建游戏的时候生成的
 
         StringBuilder sb = new StringBuilder();
         sb.append("userID=").append(this.userID).append("&")
-                .append("productID=").append(this.productID).append("&")
-                .append("productName=").append(this.productName).append("&")
-                .append("productDesc=").append(this.productDesc).append("&")
+                .append("productID=").append(this.productID == null ? "" : this.productID).append("&")
+                .append("productName=").append(this.productName == null ? "" : this.productName).append("&")
+                .append("productDesc=").append(this.productDesc == null ? "" : this.productDesc).append("&")
                 .append("money=").append(this.money).append("&")
-                .append("roleID=").append(this.roleID).append("&")
-                .append("roleName=").append(this.roleName).append("&")
-                .append("serverID=").append(this.serverID).append("&")
-                .append("serverName=").append(this.serverName).append("&")
-                .append("extension=").append(this.extension);
+                .append("roleID=").append(this.roleID == null ? "" : this.roleID).append("&")
+                .append("roleName=").append(this.roleName == null ? "" : this.roleName).append("&")
+                .append("serverID=").append(this.serverID == null ? "" : this.serverID).append("&")
+                .append("serverName=").append(this.serverName == null ? "" : this.serverName).append("&")
+                .append("extension=").append(this.extension == null ? "" : this.extension);
+
         if(!StringUtils.isEmpty(notifyUrl)){
             sb.append("&notifyUrl=").append(this.notifyUrl);
         }
 
-        sb.append(user.getGame().getAppSecret());
+        if("rsa".equalsIgnoreCase(this.signType)){
+            String encoded = URLEncoder.encode(sb.toString(), "UTF-8");
+
+            Log.d("The encoded getOrderID sign is "+encoded);
+            Log.d("The getOrderID sign is "+sign);
+
+            return RSAUtils.verify(encoded, sign,  user.getGame().getAppRSAPubKey(), "UTF-8", "SHA1withRSA");
+        }
+
+        //md5 sign
+        sb.append(user.getGame().getAppkey());
+
+        Log.d("the appkey:%s", user.getGame().getAppkey());
 
         String encoded = URLEncoder.encode(sb.toString(), "UTF-8");
 
         Log.d("The encoded getOrderID sign is "+encoded);
         Log.d("The getOrderID sign is "+sign);
+        String newSign = EncryptUtils.md5(encoded);
 
-
-        if("md5".equalsIgnoreCase(this.signType)){
-
-            String newSign = EncryptUtils.md5(encoded);
-
-            Log.d("the sign now is md5; newSign:"+newSign);
-            return newSign.toLowerCase().equals(this.sign);
-        }
-
-        return RSAUtils.verify(encoded, sign,  user.getGame().getAppRSAPubKey(), "UTF-8");
+        Log.d("the sign now is md5; newSign:"+newSign);
+        return newSign.toLowerCase().equals(this.sign);
 
     }
 
