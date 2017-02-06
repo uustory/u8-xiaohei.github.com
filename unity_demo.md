@@ -9,7 +9,7 @@ Android
 对于Android平台， 我们创建一个中间工程来接入U8SDK，同时负责U8SDK和Unity的通信。然后我们也封装了一套Unity中的接口，游戏中只需要导入u8sdk_unity.unitypackage到工程中，即可使用Unity中对应的api。这套api同时抽象了android和iOS平台的接口，游戏中采用统一的接口调用。
 
 
-下载地址：[U8SDK Unity Demo](http://pan.baidu.com/s/1gE3JC)
+下载地址：[U8SDK Unity Demo](http://pan.baidu.com/s/1gE3JC) (注意：需要依赖购买的抽象层框架和打包工具一起使用)
 
 关于Unity中接入U8SDK，你还可以看我们官方博客中对应的文章,了解详细的接入步骤和api：
 
@@ -22,4 +22,4 @@ iOS
 
 对于iOS平台， 我们直接调用U8SDK抽象层的接口完成接入。游戏中只需要导入u8sdk_unity.unitypackage到工程中，即可使用Unity中对应的api。这套api同时抽象了android和iOS平台的接口，游戏中采用统一的接口调用。
 
-下载地址（和Android是同一个）：[U8SDK Unity Demo](http://pan.baidu.com/s/1gE3JC)
+下载地址（和Android是同一个）：[U8SDK Unity Demo](http://pan.baidu.com/s/1gE3JC) (注意：需要依赖购买的抽象层框架和打包工具一起使用)

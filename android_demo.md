@@ -8,7 +8,7 @@ Android
 
 Android原生平台的Demo，我们演示了，在Android中，怎么接入U8SDK，怎么调用U8SDK2抽象层Android版本提供的接口。
 
-下载地址：[U8SDK Android Demo](http://pan.baidu.com/s/1eQyNlYy)
+下载地址：[U8SDK Android Demo](http://pan.baidu.com/s/1eQyNlYy) (注意：需要依赖购买的抽象层框架和打包工具一起使用)
 
 
 iOS
@@ -16,4 +16,4 @@ iOS
 
 iOS原生平台的Demo，我们演示了，在iOS应用中，怎么接入U8SDK，怎么调用U8SDK2抽象层iOS版本提供的接口。
 
-下载地址：[U8SDK iOS Demo]()
+Demo源码：购买之后的版本目录/u8test/U8SDKDemo

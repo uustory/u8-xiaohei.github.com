@@ -78,6 +78,10 @@ Android平台
 | 59    | 第一弹 | U8SDK_DiYiDan  | diyidan |
 | 60    | 益玩 | U8SDK_EWan  | ewan |
 | 61    | 小皮手游 | U8SDK_XiaoPi  | xiaopi |
+| 62    | 星游(StarGame) | U8SDK_StarGame  | stargame |
+| 63    | 49游 | U8SDK_SiJiuYou  | 49you |
+| 64    | N多市场 | U8SDK_NDuo  | nduo |
+| 65    | 今日头条 | U8SDK_TouTiao  | toutiao |
 
 iOS平台
 -------

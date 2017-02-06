@@ -9,7 +9,7 @@ Android
 对于Android平台， 我们创建一个中间工程来接入U8SDK，同时负责U8SDK和Cocos2dx的通信。然后我们也封装了一套Cocos2dx中的C++接口。游戏中只需要将这些类放到游戏工程中，并配置，即可使用C++中对应的api。这套api同时抽象了android和iOS平台的接口，游戏中采用统一的接口调用。
 
 
-下载地址：[U8SDK Cocos2dx Demo](http://pan.baidu.com/s/1jGfInh8)
+下载地址：[U8SDK Cocos2dx Demo](http://pan.baidu.com/s/1jGfInh8) (注意：需要依赖购买的抽象层框架和打包工具一起使用)
 
 关于Cocos2dx中接入U8SDK，你还可以看我们官方博客中对应的文章,了解详细的接入步骤和api：
 
