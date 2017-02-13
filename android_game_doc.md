@@ -391,6 +391,7 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
           {
             userID:U8Server生成的唯一用户ID
             username:U8Server生成的统一格式的用户名
+            channelID:渠道号
 
         }
     }
