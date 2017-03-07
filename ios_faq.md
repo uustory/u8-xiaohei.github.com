@@ -5,6 +5,7 @@ IOS常见问题
 ---------
 
 打包证书可以在config.json中指定, 有三种方式
+
 1. 指定开发者TeamID
 采用这种方式, xcode会自动匹配打包证书, 配置关键字:DevelopmentTeam 
 示例:
@@ -26,6 +27,7 @@ IOS常见问题
 }
 ```
 (注意: 这种方式需要xcode添加好开发者账号, 如果本地没有匹配的证书的话打包工具会报错, 这时需要用xcode打开工程确认一下是否有匹配的证书)
+
 2. 指定证书(provision profile)名称
 配置关键字:provision, 证书的名称可以通过苹果开发者后台或者xcode查看
 示例:
@@ -46,6 +48,7 @@ IOS常见问题
     ]
 }
 ```
+
 3. 指定证书文件名
 配置关键字还是provision, 文件名的扩展名必须是.mobileprovision, 文件要与config.json放在同一目录
 这种方式适于给第三方合作者打包, 合作者提供打包证书p12和mobileprovision文件
