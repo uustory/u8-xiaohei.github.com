@@ -81,7 +81,13 @@ Android平台
 | 62    | 星游(StarGame) | U8SDK_StarGame  | stargame |
 | 63    | 49游 | U8SDK_SiJiuYou  | 49you |
 | 64    | N多市场 | U8SDK_NDuo  | nduo |
-| 65    | 今日头条 | U8SDK_TouTiao  | toutiao |
+| 65    | 葫芦侠 | U8SDK_HuLuXia  | huluxia |
+| 66    | 逍遥模拟器 | U8SDK_XiaoYao  | xiaoyao |
+| 67    | 七果游戏(七匣子) | U8SDK_QiGuo  | qiguo |
+| 68    | 蘑菇玩 | U8SDK_MoGuWan  | moguwan |
+| 69    | 185手游 | U8SDK_SY185  | sy185 |
+| 70    | 07073手游 | U8SDK_SY07073  | sy07073 |
+
 
 iOS平台
 -------

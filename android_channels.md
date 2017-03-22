@@ -360,6 +360,31 @@ AppID：对方提供的AppID
 AppKey：对方提供的AppKey
 AppPublicKey：对方提供的支付密钥
 
+**葫芦侠**
+
+AppID：对方提供的AppID
+AppSecret：对方提供的密钥
+
+**逍遥模拟器**
+
+AppSecret：对方提供的密钥
+
+**七果游戏**
+
+AppKey：对方提供的Key
+
+**蘑菇玩**
+
+AppSecret：对方提供的密钥
+
+**185手游**
+
+AppSecret：对方提供的密码
+
+**07073手游**
+
+CpID：对方提供的PID
+AppKey：对方提供的AppKey
 
 
 
