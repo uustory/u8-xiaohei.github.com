@@ -1,5 +1,53 @@
-IOS渠道SDK配置
+IOS打包配置
 =======
+
+#### 游戏打包目录
+
+ios版本的游戏打包目录可以放在任何地方, 这点跟apk打包必须放在约定目录不一样, 
+执行ios打包脚本的时候通过参数指定打包目录
+打包目录下有common和channels两个子目录, common目录是"基础配置", channels下面的每个子目录对应一个"渠道配置"
+
+**为了方便，将我们提供的game1中所有的东西，拷贝过来。**
+
+#### 修改打包配置
+
+基础配置和每个渠道配置目录下都有个config.json文件
+例如u8test下面的common/config.json
+```
+{
+	"product_name":"u8demo",
+	"U8SDK": {
+		"AppId": 1,
+		"AppKey": "f32fdc02123a82524eb4ea95e1383d0b",
+		"U8Url": "http://xxxxxx.com:8080/u8server/"
+	}
+}
+```
+itools渠道配置channels/itools/config.json
+```
+{
+	"desc":"iTools苹果市场",
+	"U8SDK": {
+		"Channel": 1000
+	},
+	"plugins": [
+		{
+			"name": "iTools",
+			"appid": "1",
+			"appkey": "58C6A68DDDEE471AA43266E427F38D92"
+		},
+		{
+			"name": "UMAnalytics",
+			"appkey": "5752ef4ce0f55a8cb7003a3e"
+		},
+		{
+			"name": "UMPush",
+			"appkey": "5752ef4ce0f55a8cb7003a3e"
+		}
+	]
+}
+
+```
 
 配置渠道SDK参数
 -------------
