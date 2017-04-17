@@ -1,70 +1,22 @@
-接入新渠道
+接入新SDK
 ===========
 
 NOTE:在U8SDK框架基础上接入一个新渠道SDK，首先，心里请明确一点。接入过程和游戏工程没有半点联系，也就是说，游戏开发和SDK接入是完全解耦的。所以，接入的时候，不要想着游戏中怎样怎样，严格按照下面的步骤进行接入即可。
 所有的接入工程都放在一个统一的目录，默认是放在打包工具根目录/Plugins目录下。所有接入工程的命名格式必须固定，统一为U8SDK_***
 
 
-准备接入工程
+创建新的SDK插件
 -------
 
-**1、拷贝一个已有的工程**
+**更新: 为了方便接入新的SDK, 我们提供了插件创建脚本, 以前手动创建接入工程的方式不再推荐 **
 
+Plugins目录下的create_plugin.py就是我们提供的接入工程创建工具, 它以SDK接入工程U8SDK_Template做为模板生成新的接入工程
+
+创建一个工程:U8SDK_AAA
 ```
-为了快速搭建一个新渠道SDK的接入工程，我们首先从一个已有的接入工程拷贝一份，并重新命名一下。比如我们现在要新接入一个新的渠道SDK：aaa。那么我们，在Plugins目录下，拷贝一个已有的接入工程，比如U8SDK_iTools工程。我们直接选中iTools工程，然后［Command＋D］，复制一份U8SDK_iTools工程，文件夹重命名为U8SDK_AAA
-
-进入U8SDK_AAA目录，用xcode打开U8SDKDemo.xcodeproj，现在这个工程目录结构如下：
+cd Plugins
+python create_plugin.py U8SDK_AAA
 ```
-![](images/ios_proj_config1.png)
-```
-1、SDK目录：这个目录下存放当前渠道SDK需要的库文件和资源
-2、U8SDK_iTools.xcodeproj:当前接入工程，接入工作就在这里完成
-3、U8SDK.xcodeproj:引用的U8SDK抽象层工程
-4、U8SDKDemo:当前的启动工程，接好之后，可以运行demo，在模拟器上直接测试看效果
-5、Products:最终编译生成的静态库文件
-
-```
-
-**2、重命名接入工程，配置target**
-
-```
-上面我们打开了U8SDK_AAA这个工程，但是打开之后，接入工程还是U8SDK_iTools，我们需要重命名一下，修改为U8SDK_AAA:
-
-1、左边选中U8SDK_iTools.xcodeproj
-2、再轻轻点击一次，重命名一下这个文件，为U8SDK_AAA
-3、这个时候，弹出重命名确认框，默认所有都选中，保持原样，然后点击rename，把相关target也进行重命名。
-```
-![](images/ios_proj_config2.png)
-
-重命名之后，可以看到target也都重命名了：
-
-![](images/ios_proj_config3.png)
-
-然后，在Finder中到该工程目录下重命名U8SDK_iTools子目录为U8SDK_AAA，然后到xcode中删除U8SDK_iTools文件夹和里面的U8SDK_iTools.h和U8SDK_iTools.m文件。
-
-将重命名之后的U8SDK_AAA目录拖到xcode工程中U8SDK_AAA.xcodeproj下面：
-
-![](images/ios_proj_config6.png)
-
-
-**3、配置Schemes**
-
-```
-上面target重命名之后，我们需要修改下Schemes，让我们在运行的时候，执行正确的target
-
-点击菜单 Product->Scheme->Manage Schemes
-
-```
-![](images/ios_proj_config4.png)
-```
-把iTools这两个Scheme删除，直接选中，然后点击左下角［－］号，即可删除
-
-删除这两个Scheme之后，我们再点击左下角［＋］再创建一个Scheme，用来在当前工程根目录下生成一个静态库文件:libU8SDK_AAA.a
-```
-![](images/ios_proj_config5.png)
-
-到这里，我们这个新渠道aaa的接入准备工作已经完成了。接下来，我们就在这个接入工程中，来完成aaa渠道SDK的接入。
-
 
 实现渠道SDK必须接入的方法
 -------

@@ -43,7 +43,26 @@ def post_process(self, project, infoPlist, sdkparams):
 
 其他
 ---------
-**没有源码直接用ipa包可以打渠道包吗？**
+
+#### Link失败: duplicate symbol
+
+这种链接失败通常是第三方库被重复引用导致的, 接入SDK的时候要注意:**SDK静态库不能同时编译进插件和渠道工程**
+
+排查一下SDK的静态库有没有编译进插件, 如果有, 就删除插件工程中的引用
+
+另外还常见以下冲突情况, 需要处理
+* 同时接入多个第三方SDK的情况下, 可能存在SDK之间冲突的情况
+* 第三方SDK和母工程存在冲突
+
+#### Link失败: Undefined symbols for architecture arm64:
+
+![截图](images/ios_link_fail1.jpg)
+
+解决方法: 把下图的设置改为NO
+
+![截图](images/ios_link_fail2.png)
+
+#### 没有源码直接用ipa包可以打渠道包吗？
 
 U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性。不过我们提供了iparepacker工具，可以简单的修改ipa包，这个工具已经开源：https://github.com/uustory/iparepack
 

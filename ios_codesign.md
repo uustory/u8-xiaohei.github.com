@@ -71,23 +71,3 @@
 }
 ```
 采用指定provision的方式打包都需要保证: 系统中已经导入开发者证书(就是包含公开证书和密钥的p12文件),
-provision还可以指定为多个证书
-示例:
-
-``` json
-{
-    "desc":"07073（楚游/数游）",
-    "CFBundleIdentifier": "com.u8sdk.sample.cy",
-    "provision": { "develop": "dev.mobileprovision", "distribute": "dis.mobileprovision"},
-    "U8SDK": {
-        "Channel": 48
-    },
-    "plugins": [
-        {
-            "name": "07073",
-            "pid": "226",
-            "gameid": "212"
-        }
-    ]
-}
-```
