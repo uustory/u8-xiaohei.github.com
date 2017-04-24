@@ -44,6 +44,30 @@ def post_process(self, project, infoPlist, sdkparams):
 其他
 ---------
 
+#### 如何修改Architectures(cpu架构)
+
+config.json支持指定Architectures,
+如果希望支持arm64和armv7:
+```json
+{
+    "archs": "armv7 arm64"
+}
+```
+如果希望只支持arm64:
+```json
+{
+    "archs": "armv7"
+}
+```
+
+#### 执行打包脚本 报错:Permission denied
+
+需要给打包工具添加可执行权限
+```
+chmod +x buildscript/build.py
+chmod +x buildscript/u8build
+```
+
 #### Link失败: duplicate symbol
 
 这种链接失败通常是第三方库被重复引用导致的, 接入SDK的时候要注意:**SDK静态库不能同时编译进插件和渠道工程**

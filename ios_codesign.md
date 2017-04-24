@@ -27,6 +27,9 @@
 }
 ```
 (注意: 这种方式需要xcode添加好开发者账号, 如果本地没有匹配的证书的话打包工具会报错, 这时需要用xcode打开工程确认一下是否有匹配的证书)
+
+在基础配置(common/config.json)中推荐采用这种方式
+
 2. 指定证书(provision profile)名称
 ---------
 配置关键字:provision, 证书的名称可以通过苹果开发者后台或者xcode查看
@@ -50,7 +53,7 @@
 ```
 3. 指定证书文件名
 ---------
-配置关键字还是provision, 文件名的扩展名必须是.mobileprovision, 文件要与config.json放在同一目录
+配置关键字还是provision, 文件名的扩展名必须是.mobileprovision, 文件要与渠道config.json放在同一目录
 这种方式适于给第三方合作者打包, 合作者提供打包证书p12和mobileprovision文件
 示例:
 ``` json
@@ -70,4 +73,6 @@
     ]
 }
 ```
-采用指定provision的方式打包都需要保证: 系统中已经导入开发者证书(就是包含公开证书和密钥的p12文件),
+采用指定provision的方式打包都需要保证: 系统中已经导入开发者证书(就是包含公开证书和密钥的p12文件)
+
+这种方式只能用于渠道配置, 不能用于common/config.json, 因为mobileprovision文件必须放在渠道配置目录下
