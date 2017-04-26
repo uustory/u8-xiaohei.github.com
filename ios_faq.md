@@ -60,6 +60,15 @@ config.json支持指定Architectures,
 }
 ```
 
+#### xcode工程有多个target, 怎样指定要编译的target
+
+在common/config.json里面指定
+```json
+{
+    "target": "target名称"
+}
+```
+
 #### 执行打包脚本 报错:Permission denied
 
 需要给打包工具添加可执行权限
@@ -90,10 +99,15 @@ chmod +x buildscript/u8build
 
 U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性。不过我们提供了iparepacker工具，可以简单的修改ipa包，这个工具已经开源：https://github.com/uustory/iparepack
 
-**编译报错error: no provisioning profile matches 'XC Ad Hoc: \*'**
-
+#### 编译失败, 找不到provision profile
+```
+error: no provisioning profile matches 'XC Ad Hoc: \*'
+```
 在common/config.json中修改provision字段，改为苹果开发者帐号里的provision的名字。
 
-**xcodebuild: error: The project named "U8SDKDemo" does not contain a scheme named "U8SDKDemo". The "-list" option can be used to find the names of the schemes in the project.**
+#### 编译失败, scheme不存在
+```
+xcodebuild: error: The project named "U8SDKDemo" does not contain a scheme named "U8SDKDemo". The "-list" option can be used to find the names of the schemes in the project.
+```
 
-母工程的scheme名称跟target名称不一致，需要用xcode打开母工程， 打开Manage Schemes， 重新生成Scheme
+一般是母工程的scheme名称跟target名称不一致的，需要用xcode打开母工程， 打开Manage Schemes， 重新生成Scheme
