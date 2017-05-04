@@ -1,98 +1,6 @@
 IOS常见问题
 =========
 
-怎样指定打包证书
----------
-
-打包证书可以在config.json中指定, 有三种方式
-
-1. 指定开发者TeamID
-采用这种方式, xcode会自动匹配打包证书, 配置关键字:DevelopmentTeam 
-示例:
-``` json
-{
-    "desc":"07073（楚游/数游）",
-    "CFBundleIdentifier": "com.u8sdk.sample.cy",
-    "DevelopmentTeam": "A1B2C3D4",
-    "U8SDK": {
-        "Channel": 48
-    },
-    "plugins": [
-        {
-            "name": "07073",
-            "pid": "226",
-            "gameid": "212"
-        }
-    ]
-}
-```
-(注意: 这种方式需要xcode添加好开发者账号, 如果本地没有匹配的证书的话打包工具会报错, 这时需要用xcode打开工程确认一下是否有匹配的证书)
-
-2. 指定证书(provision profile)名称
-配置关键字:provision, 证书的名称可以通过苹果开发者后台或者xcode查看
-示例:
-``` json
-{
-    "desc":"07073（楚游/数游）",
-    "CFBundleIdentifier": "com.u8sdk.sample.cy",
-    "provision": "XXXDev",
-    "U8SDK": {
-        "Channel": 48
-    },
-    "plugins": [
-        {
-            "name": "07073",
-            "pid": "226",
-            "gameid": "212"
-        }
-    ]
-}
-```
-
-3. 指定证书文件名
-配置关键字还是provision, 文件名的扩展名必须是.mobileprovision, 文件要与config.json放在同一目录
-这种方式适于给第三方合作者打包, 合作者提供打包证书p12和mobileprovision文件
-示例:
-
-``` json
-{
-    "desc":"07073（楚游/数游）",
-    "CFBundleIdentifier": "com.u8sdk.sample.cy",
-    "provision": "dev.mobileprovision",
-    "U8SDK": {
-        "Channel": 48
-    },
-    "plugins": [
-        {
-            "name": "07073",
-            "pid": "226",
-            "gameid": "212"
-        }
-    ]
-}
-```
-采用指定provision的方式打包都需要保证: 系统中已经导入开发者证书(就是包含公开证书和密钥的p12文件),
-provision还可以指定为多个证书
-示例:
-
-``` json
-{
-    "desc":"07073（楚游/数游）",
-    "CFBundleIdentifier": "com.u8sdk.sample.cy",
-    "provision": { "develop": "dev.mobileprovision", "distribute": "dis.mobileprovision"},
-    "U8SDK": {
-        "Channel": 48
-    },
-    "plugins": [
-        {
-            "name": "07073",
-            "pid": "226",
-            "gameid": "212"
-        }
-    ]
-}
-```
-
 Appstore
 ---------
 **怎样提交Appstore审核？**
@@ -135,14 +43,71 @@ def post_process(self, project, infoPlist, sdkparams):
 
 其他
 ---------
-**没有源码直接用ipa包可以打渠道包吗？**
+
+#### 如何修改Architectures(cpu架构)
+
+config.json支持指定Architectures,
+如果希望支持arm64和armv7:
+```json
+{
+    "archs": "armv7 arm64"
+}
+```
+如果希望只支持arm64:
+```json
+{
+    "archs": "armv7"
+}
+```
+
+#### xcode工程有多个target, 怎样指定要编译的target
+
+在common/config.json里面指定
+```json
+{
+    "target": "target名称"
+}
+```
+
+#### 执行打包脚本 报错:Permission denied
+
+需要给打包工具添加可执行权限
+```
+chmod +x buildscript/build.py
+chmod +x buildscript/u8build
+```
+
+#### Link失败: duplicate symbol
+
+这种链接失败通常是第三方库被重复引用导致的, 接入SDK的时候要注意:**SDK静态库不能同时编译进插件和渠道工程**
+
+排查一下SDK的静态库有没有编译进插件, 如果有, 就删除插件工程中的引用
+
+另外还常见以下冲突情况, 需要处理
+* 同时接入多个第三方SDK的情况下, 可能存在SDK之间冲突的情况
+* 第三方SDK和母工程存在冲突
+
+#### Link失败: Undefined symbols for architecture arm64:
+
+![截图](images/ios_link_fail1.jpg)
+
+解决方法: 把下图的设置改为NO
+
+![截图](images/ios_link_fail2.png)
+
+#### 没有源码直接用ipa包可以打渠道包吗？
 
 U8SDK仅支持基于源码打包，我们以后会研究这种方式的可行性。不过我们提供了iparepacker工具，可以简单的修改ipa包，这个工具已经开源：https://github.com/uustory/iparepack
 
-**编译报错error: no provisioning profile matches 'XC Ad Hoc: \*'**
-
+#### 编译失败, 找不到provision profile
+```
+error: no provisioning profile matches 'XC Ad Hoc: \*'
+```
 在common/config.json中修改provision字段，改为苹果开发者帐号里的provision的名字。
 
-**xcodebuild: error: The project named "U8SDKDemo" does not contain a scheme named "U8SDKDemo". The "-list" option can be used to find the names of the schemes in the project.**
+#### 编译失败, scheme不存在
+```
+xcodebuild: error: The project named "U8SDKDemo" does not contain a scheme named "U8SDKDemo". The "-list" option can be used to find the names of the schemes in the project.
+```
 
-母工程的scheme名称跟target名称不一致，需要用xcode打开母工程， 打开Manage Schemes， 重新生成Scheme
+一般是母工程的scheme名称跟target名称不一致的，需要用xcode打开母工程， 打开Manage Schemes， 重新生成Scheme

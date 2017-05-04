@@ -1,70 +1,22 @@
-接入新渠道
+接入新SDK
 ===========
 
 NOTE:在U8SDK框架基础上接入一个新渠道SDK，首先，心里请明确一点。接入过程和游戏工程没有半点联系，也就是说，游戏开发和SDK接入是完全解耦的。所以，接入的时候，不要想着游戏中怎样怎样，严格按照下面的步骤进行接入即可。
 所有的接入工程都放在一个统一的目录，默认是放在打包工具根目录/Plugins目录下。所有接入工程的命名格式必须固定，统一为U8SDK_***
 
 
-准备接入工程
+创建新的SDK插件
 -------
 
-**1、拷贝一个已有的工程**
+**更新: 为了方便接入新的SDK, 我们提供了插件创建脚本, 以前手动创建接入工程的方式不再推荐 **
 
+Plugins目录下的create_plugin.py就是我们提供的接入工程创建工具, 它以SDK接入工程U8SDK_Template做为模板生成新的接入工程
+
+创建一个工程:U8SDK_AAA
 ```
-为了快速搭建一个新渠道SDK的接入工程，我们首先从一个已有的接入工程拷贝一份，并重新命名一下。比如我们现在要新接入一个新的渠道SDK：aaa。那么我们，在Plugins目录下，拷贝一个已有的接入工程，比如U8SDK_iTools工程。我们直接选中iTools工程，然后［Command＋D］，复制一份U8SDK_iTools工程，文件夹重命名为U8SDK_AAA
-
-进入U8SDK_AAA目录，用xcode打开U8SDKDemo.xcodeproj，现在这个工程目录结构如下：
+cd Plugins
+python create_plugin.py U8SDK_AAA
 ```
-![](images/ios_proj_config1.png)
-```
-1、SDK目录：这个目录下存放当前渠道SDK需要的库文件和资源
-2、U8SDK_iTools.xcodeproj:当前接入工程，接入工作就在这里完成
-3、U8SDK.xcodeproj:引用的U8SDK抽象层工程
-4、U8SDKDemo:当前的启动工程，接好之后，可以运行demo，在模拟器上直接测试看效果
-5、Products:最终编译生成的静态库文件
-
-```
-
-**2、重命名接入工程，配置target**
-
-```
-上面我们打开了U8SDK_AAA这个工程，但是打开之后，接入工程还是U8SDK_iTools，我们需要重命名一下，修改为U8SDK_AAA:
-
-1、左边选中U8SDK_iTools.xcodeproj
-2、再轻轻点击一次，重命名一下这个文件，为U8SDK_AAA
-3、这个时候，弹出重命名确认框，默认所有都选中，保持原样，然后点击rename，把相关target也进行重命名。
-```
-![](images/ios_proj_config2.png)
-
-重命名之后，可以看到target也都重命名了：
-
-![](images/ios_proj_config3.png)
-
-然后，在Finder中到该工程目录下重命名U8SDK_iTools子目录为U8SDK_AAA，然后到xcode中删除U8SDK_iTools文件夹和里面的U8SDK_iTools.h和U8SDK_iTools.m文件。
-
-将重命名之后的U8SDK_AAA目录拖到xcode工程中U8SDK_AAA.xcodeproj下面：
-
-![](images/ios_proj_config6.png)
-
-
-**3、配置Schemes**
-
-```
-上面target重命名之后，我们需要修改下Schemes，让我们在运行的时候，执行正确的target
-
-点击菜单 Product->Scheme->Manage Schemes
-
-```
-![](images/ios_proj_config4.png)
-```
-把iTools这两个Scheme删除，直接选中，然后点击左下角［－］号，即可删除
-
-删除这两个Scheme之后，我们再点击左下角［＋］再创建一个Scheme，用来在当前工程根目录下生成一个静态库文件:libU8SDK_AAA.a
-```
-![](images/ios_proj_config5.png)
-
-到这里，我们这个新渠道aaa的接入准备工作已经完成了。接下来，我们就在这个接入工程中，来完成aaa渠道SDK的接入。
-
 
 实现渠道SDK必须接入的方法
 -------
@@ -76,12 +28,10 @@ NOTE:所有渠道SDK需要接入的方法，都大同小异。我们将其归为
 
 **1、引入SDK库和资源**
 
-```
-一般渠道SDK，都会提供一些库文件和资源文件，接入的时候，需要将这些文件拷贝到该工程下面SDK目录下，上面，我们这里SDK目录下还是iTools的库文件和资源。
+一般渠道SDK，都会提供一些库文件和资源文件，接入的时候，需要将这些文件拷贝到该工程下面SDK目录下，同时，添加SDK目录中的framework和头文件到接入工程,
+通常可以直接把整个SDK目录加到接入工程中, 但是要注意:  
+**SDK目录下的静态库不能加入接入工程, 否则会导致最终编译渠道工程时连接失败**
 
-这里，我们先删除这些库文件和资源，然后，加入aaa渠道SDK提供的库和资源文件。同时，在xcode工程中，也删除之前iTools的库和资源的引用，添加aaa需要的库和资源
-
-```
 
 **2、实现需要的方法**
 
@@ -452,61 +402,3 @@ def post_process(self, project, infoPlist, sdkparams):
 
 到这里，我们上面接入成功之后，我们可以运行之前我们重命名之后的名为U8SDK_AAADeploy的Scheme，编译成功之后，会在根目录下生成一个名为libU8SDK_AAA.a的静态库文件。
 
-配置渠道SDK参数
--------------
-
-```
-渠道参数的配置，例如，渠道分配的appID，appKey，SecretKey等参数，各个游戏都不相同，所以，我们需要将这些参数配置在各个游戏的工作目录中。
-
-所以，我们在各个游戏的工作目录中，我们都需要建立一个channels子目录，用于存放各个渠道的参数配置，和特殊资源。比如，AAA渠道，我们在channels目录下，新建一个AAA目录，然后在这个目录中，新建一个config.json，内容如下：
-
-{
-    "desc":"AAA SDK",
-    "U8SDK": {
-        "Channel": 2001
-    },
-    "plugins": [
-        {
-            "name": "AAA",          //这里的名称必须和接入工程目录名称_之后的匹配。
-                                    //比如我们接入工程叫U8SDK_AAA，那么这里的name就是AAA
-            "appid": "1",           //在initWithParams中，我们根据这里的key解析参数
-            "appkey": "58C6A68DDDEE471AA43266E427F38D92"    //在initWithParams中，我们根据这里的key解析参数
-        }
-    ]
-}
-
-desc：当前渠道的名称或者说明
-U8SDK：和common下的config.json中的U8SDK节点的内容会合并到一起。
-     ---Channel:当前渠道的渠道号
-plugins:这里是配置当前渠道支持的插件，注意这里是数组，这里支持将多个插件组合在一起，比如，我们接AppStore的时候，AppStore只有一个支付功能，我们还需要接入一个登录功能，我们希望使用Facebook登录。那么，我们可以独立接入AppStore和Facebook，然后在这里，配置这两个插件
-    ---name:渠道名称，渠道SDK接入工程命名规则时U8SDK_***;这里的名称，必须和***一致。比如插件工程命名为U8SDK_iTools，那么这里的name的值必须为iTools.
-    ---其他渠道参数，代码中或者自定义脚本中需要的参数，都可以在这里添加，key和读取的时候，保持一致即可
-
-```
-
-配置ICON角标
--------------
-
-NOTE:部分渠道没有角标要求，我们可以直接将游戏的ICON放在游戏工作目录中的common目录中，同样命名为AppIcon.appiconset，结构和下图一致。这样，没有角标需求的渠道的ICON，将默认使用这个。
-
-```
-如果渠道SDK有要求ICON加角标，那么需要让美术同学做好对应的带有角标的ICON，按照固定的方式，存放在游戏工作目录／channels下改渠道的配置目录。在名称为AppIcon.appiconset的目录下，存放对应尺寸的图片，命名格式和文件结构如下：
-
-可以从其他渠道配置目录中，拷贝一份，然后交给美术，按照要求做好，再替换进来。
-
-```
-![](images/ios_icon.png)
-
-
-配置渠道SDK闪屏
--------------
-
-NOTE:部分渠道有闪屏要求，一般我们可以在游戏工作目录中的common目录中，放上通用的闪屏文件，同样的命名为LaunchImage.launchimage，结构和下图一样。对于没有闪屏的渠道SDK，默认将使用这里的闪屏
-
-```
-各个渠道的闪屏文件，按照固定的格式，放在改游戏工作目录／channels下该渠道的配置目录。在名称为LaunchImage.launchimage的目录下，存放对应尺寸的图片，命名格式和文件结构如下图：
-
-可以从其他渠道配置目录中，拷贝一份，然后交给美术，按照要求做好，再替换进来。
-
-```
-![](images/ios_launchimages.png)

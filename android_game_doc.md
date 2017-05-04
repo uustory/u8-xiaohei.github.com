@@ -70,14 +70,22 @@ NOTE:所有接口调用，都通过com.u8.sdk.platform.U8Platform 单例类来�
                 //用户登出回调（需要收到该回调需要返回游戏登录界面，并调用login接口，打开SDK登录界面）
             }
             
-            //登录结果的回调
+            //渠道SDK登录并去u8server登录认证成功，会回调改方法。
+            //UToken中的参数如下：
+            //userID:U8Server生成的唯一用户ID，游戏服务器需要将游戏账户ID和该userID进行绑定。
+            //sdkUserID:渠道SDK平台用户唯一ID，一般不需要使用
+            //username:U8Server生成的用户名，比如234234234.uc,4353453453.baidu,65756756756.360
+            //sdkUserName:渠道SDK平台用户名，可能为空，部分渠道SDK没有返回用户名
+            //token:U8Server生成的会话ID，游戏服务器拿该字段去U8Server做二次登录验证
+            //extension:U8Server返回的扩展字段，部分渠道SDK需要，游戏中无需使用该字段的值
+            //timestamp:U8Server生成的时间戳，游戏服务器去U8Server做二次登录验证时，传给U8Server            
             @Override
             public void onLoginResult(int code, UToken data) {
                 switch(code){
                 case U8Code.CODE_LOGIN_SUCCESS:
                     
                     //进入游戏 
-                    
+                    //从UToken中获取用户信息
                     break;
                 case U8Code.CODE_LOGIN_FAIL:
                     Toast.makeText(MainActivity.this, "登录失败", Toast.LENGTH_LONG).show();
@@ -250,7 +258,6 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 | productName      | String      |   商品名称，比如100元宝，500钻石...|
 | productDesc| String      |    商品描述，比如 充值100元宝，赠送20元宝|
 | price| int | 充值金额(单位：元)|
-| ratio| int | 兑换比例，暂时无用途|
 | buyNum| int | 购买数量，一般都是1|
 | coinNum| int | 玩家当前身上剩余的游戏币 |
 | serverID| String| 玩家所在服务器的ID|
@@ -260,8 +267,7 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 | roleLevel| String | 玩家角色等级|
 | vip | String| 玩家vip等级 |
 | payNotifyUrl| String | 游戏服务器支付回调地址，渠道SDK支付成功，异步通知U8Server，U8Server根据该地址，通知游戏服务器发货|
-| orderID | String | U8Server订单号，下单时，U8Server返回的|
-| extension | String | 渠道相关的扩展数据，下单时，U8Server返回的|
+| extension | String | 支付成功之后，U8Server原样返回给游戏服务器|
 
 
 生命周期函数(必接)
