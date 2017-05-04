@@ -84,10 +84,11 @@ U8Server企业版后台管理系统，在线演示地址：[U8Server演示地址
 1、游戏名称：当前游戏名称
 2、AppID：创建游戏时，U8Server生成的AppID,代表该游戏
 3、AppKey：创建游戏时，U8Server生存的AppKey,用于客户端和U8Server进行交互验证的字段
-3、PublicKey：创建游戏时，U8Server生成的公钥，支付使用，下单和支付回调的时候，都需要用到
-4、PrivateKey：创建游戏时，U8Server生成的私钥，和公钥对应。支付使用。
-5、支付回调地址：U8Server处理渠道SDK支付回调成功之后，需要回调通知到游戏服。这里配置游戏服的通知地址
-6、支付回调(调试)：测试使用
+3、AppSecret：创建游戏时，U8Server生成的AppSecret，用于游戏服务器和U8Server之间校验数据的密钥（不要放在客户端）
+4、PublicKey：创建游戏时，U8Server生成的公钥，支付使用，下单和支付回调的时候，都需要用到
+5、PrivateKey：创建游戏时，U8Server生成的私钥，和公钥对应。支付使用。
+6、支付回调地址：U8Server处理渠道SDK支付回调成功之后，需要回调通知到游戏服。这里配置游戏服的通知地址
+7、支付回调(调试)：测试使用
 
 ```
 
