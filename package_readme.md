@@ -15,6 +15,7 @@ config:所有sdk,插件都放在这里;同时还包含keystore和闪屏文件
 	---plugin:当前支持的所有插件
 	---sdk:当前所有支持的渠道sdk
 	---splash:闪屏文件
+	---local:打包工具全局配置目录
 
 games:所有游戏配置目录，这个也是我们配置和操作比较频繁的目录
 	---games.xml:游戏配置文件，所有当前需要打包的游戏，都配置在这里
@@ -42,12 +43,8 @@ workspace:打包过程临时工作目录(可用于查BUG等)
 
 others-tools:CPS包等打包工具，对于只需要基于原包，输出一个仅仅渠道号不同的CPS包，使用这里的工具
 
-local和updates目录，主要用于渠道SDK的生成更新包，以及检测更新使用，具体功能可以看博客
+package.bat:打包工具执行文件， 执行该文件，进行打包
 
-package.bat:正常打包脚本
-package-all-multithread.bat:开启3个线程，打出所有配置的渠道包
-sdk-generate-update.bat：生成当前需要更新的SDK
-sdk-check-update.bat：检查当前有更新的SDK，并更新
 ```
 
 **2、新增一个游戏目录**
@@ -63,14 +60,25 @@ sdk-check-update.bat：检查当前有更新的SDK，并更新
 		<param name="appDesc" value="测试游戏1" desc="当前游戏的中文名称"/>
 		<param name="orientation" value="landscape" desc="游戏是横屏还是竖屏(landscape|portrait),不配置默认是横屏" />
 		<param name="cpuSupport" value="armeabi|armeabi-v7a" desc="当前游戏支持的cpu类型"/>
-		<param name="use_u8_auth" value="1" desc="是否用U8SDK默认的登录认证" />
-		<param name="u8_auth_url" value="http://192.168.18.9:8080/user/getToken" desc="如果这里配置了登录认证地址，那么会覆盖local.properties中配置的登录认证地址"/>		
+		<param name="u8server_url" value="http://192.168.18.9:8080" desc="U8Server根地址url" />
+		<param name="u8_analytics" value="true" desc="是否使用u8server统计功能"/>		
 		<param name="versionCode" value="15" desc="游戏包的版本号,对应AndroidManifest.xml中的versionCode"/>
 		<param name="versionName" value="2.8.5" desc="游戏包中的版本名称,对应AndroidManifest.xml中的versionName"/>
 		<param name="minSdkVersion" value="8" desc="最小支持的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
 		<param name="targetSdkVersion" value="20" desc="默认使用的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
 		<param name="maxSdkVersion" value="22" desc="最大支持的Android SDK版本，minSdkVersion,targetSdkVersion,maxSdkVersion 三个同时配置，或者同时不配置"/>
 		<param name="outputApkName" value="{channelName}.apk" desc="最终apk包名格式：{bundleID}:包名,{versionName}:版本名称,{versionCode}:版本号,{time}:时间戳(yyyyMMddmmss),{channelID}:渠道号,{channelName}:渠道名,{appName}:游戏名,{appID}:appID"/>	
+
+
+		<log>
+			<param name="ulog.enable" value="true" desc="是否进行日志打印"/>
+			<param name="ulog.level" value="DEBUG" desc="日志级别(DEBUG|INFO|WARNING|ERROR)"/>
+			<param name="ulog.local" value="true" desc="是否在logcat中打印"/>
+			<param name="ulog.remote" value="true" desc="是否在网页中远程打印，这里设置为true，需要启动scripts/uconsole.py"/>
+			<param name="ulog.remote_interval" value="1000" desc="远程打印时间间隔，单位毫秒"/>
+			<param name="ulog.remote_url" value="http://192.168.1.108:8090/" desc="远程打印地址，uconsole.py启动监听的地址"/>
+		</log>		
+
 	</game> 	
 
 （3）从其他游戏配置目录下，拷贝一份channels和keystore过来，同时拷贝config.xml和keystore.xml两个配置文件
@@ -140,15 +148,15 @@ gameName:如果渠道包的游戏名称特殊，可以配置这里，将覆盖�
 signApk:是否对最终的apk包进行签名。默认是签名的，如果不需要签名，则设置为0
 extraR:是否需要在其他的包名下面生成R.java，多个包名，用逗号分割(一般用于海外渠道)
 sdk-version:用于和u8server对比使用的版本
-sdk-params:当前渠道的参数配置
-plugins:当前渠道支持的插件
+sdk-params:当前渠道的参数配置，这里的参数name字段，必须和该渠道[打包工具/config/sdk目录下]配置目录下config.xml中的params节点定义的参数一致。
+plugins:当前渠道支持的插件，name为打包工具/config/plugin目录下的该插件的目录名称。
 
 ```
 
 **3、母包相关**
 
 ```
-（1）母包是指接入了U8SDK抽象层（U8SDK2）的游戏，所打出的apk包
+（1）母包是指接入了U8SDK抽象层（U8SDK3）的游戏，所打出的apk包
 （2）每个游戏都有一个母包
 （3）母包必须放在游戏配置目录下，并以u8.apk命名
 （4）母包直接安装是没有渠道SDK的，必须经过打包工具打包

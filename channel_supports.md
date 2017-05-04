@@ -87,6 +87,8 @@ Android平台
 | 68    | 蘑菇玩 | U8SDK_MoGuWan  | moguwan |
 | 69    | 185手游 | U8SDK_SY185  | sy185 |
 | 70    | 07073手游 | U8SDK_SY07073  | sy07073 |
+| 71    | 海马玩 | U8SDK_HaiMa  | haima |
+| 72    | 说玩 | U8SDK_ShuoWan  | shouwan |
 
 
 iOS平台
