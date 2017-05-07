@@ -19,6 +19,7 @@
   - - - -
   * [接入新渠道](android_addchannel.md)
   * [新渠道配置](android_package.md)  
+  * [服务器端接入](u8server_addchannel.md)  
   - - - -
   * [插件扩展](android_plugins.md)  
   - - - -
@@ -30,7 +31,10 @@
 [iOS文档]()
 
   * [游戏接入指南](ios_game_doc.md)
+  - - - -  
   * [接入新渠道](ios_addchannel.md)
+  * [服务器端接入](u8server_addchannel.md)    
+  - - - -  
   * [iOS插件调试](ios_debug.md)
   * [证书指定](ios_codesign.md)
   - - - -  
