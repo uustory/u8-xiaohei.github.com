@@ -101,7 +101,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 参数：
 	userID：上面登录认证成功之后，U8Server返回的userID
 	token：上面登录认证成功之后，U8Server返回的token
-	sign：md5("userID="+userID+"token="+token+appKey);这里游戏服务器按照格式，生成一个md5串，appKey是U8Server分配给游戏的AppKey
+	sign：md5("userID="+userID+"token="+token+appSecret);这里游戏服务器按照格式生成一个md5串(32位小写)，appSecret是U8Server创建游戏时，生成的AppSecret
 
 返回(JSON格式)：
 	{
