@@ -1,4 +1,5 @@
 
+
 生产环境中，为了尽可能地让u8server服务高可用，除了u8server本身对分布式部署的支持。数据库层面，也需要满足稳定和高可用性。本文中，我们使用Mycat这一开源数据库中间件，实现基本的主从读写分离，主备自动切换。
 
 同时对u8server中核心业务数据用户表和订单表进行了数据的水平切分，实现分库分表。
@@ -7,64 +8,66 @@
 
 下面记录了本次实时测试的完整步骤：
 
-一、多mysql实例安装
+多mysql实例安装
+------
 
 1、拷贝mysql目录
 2、拷贝my_default.ini-》重命名为my.ini
 3、修改my.ini配置，在[mysqld]下面添加：
 
-``````
+~~~~~~
 basedir = I:/Program Files (x86)/MySQL Server 5.7-3307
 datadir = I:/Program Files (x86)/MySQL Server 5.7-3307/data
 port = 3307
 character-set-server=utf8
-``````
+~~~~~~
 
 4、添加mysql3307系统服务，执行命令：
 
-``````
+~~~~~~
 I:\Program Files (x86)\MySQL Server 5.7-3307\bin>mysqld install mysql3307 --defa
 ults-file="I:\Program Files (x86)\MySQL Server 5.7-3307\my.ini"
-``````
+~~~~~~
 
 5、初始化数据库，执行命令：
 
-``````
+~~~~~~
 I:\Program Files (x86)\MySQL Server 5.7-3307\bin>mysqld --defaults-file="I:\Prog
 ram Files (x86)\MySQL Server 5.7-3307\my.ini" --initialize --explicit_defaults_f
 or_timestamp
-``````
+~~~~~~
 
 6、启动服务
 
-``````
+~~~~~~
 net start mysql3307
-``````
+~~~~~~
 
 7、修改初始密码，在data目录下，找到[user]-err.txt，打开，在里面搜索password关键字：
 找到初始密码
 
 8、修改初始密码，执行命令：
 
-``````
+~~~~~~
 I:\Program Files (x86)\MySQL Server 5.7-3307\bin>mysql -u root -p -hlocalhost -P
 3307
-``````
+~~~~~~
 
 输入初始密码，进入mysql
 
 继续执行命令：
 
-``````
+~~~~~~
 set password = password('your_password');
-``````
+~~~~~~
 
 然后exit 退出
 
 按照上面步骤，安装一台端口3309的mysql
 
 
-二、配置mysql主从
+配置mysql主从
+------
 
 3307为主，3309为从
 
@@ -74,16 +77,16 @@ set password = password('your_password');
 
 1.2修改配置,my.ini里面 [mysqld]下面增加两行配置：
 
-``````
+~~~~~~
 log-bin=mysql-bin
 server_id = 1
-``````
+~~~~~~
 
 1.3重启mysql服务：net start mysql3307
 
 1.4 连上mysql3307，创建用户slave同步数据使用的用户和密码：
 
-``````
+~~~~~~
 mysql> create user repl;
 mysql> grant replication slave on *.* to 'repl'@'localhost' identified by 'slave@123';
 mysql> show master status;
@@ -98,7 +101,7 @@ Set |
 +------------------+----------+--------------+------------------+--------------
 ----+
 1 row in set (0.00 sec)
-``````
+~~~~~~
 
 2、配置3309从服务器：
 
@@ -106,32 +109,35 @@ Set |
 
 2.2 修改配置，my.ini里面[mysqld]下面增加配置：
 
-``````
+~~~~~~
 server_id = 2
 
-``````
+~~~~~~
 
 2.3 重启mysql服务： net start mysql3309
 
 2.4 连上mysql3309， 修改指向的master：
 
-``````
+~~~~~~
 mysql> change master to master_host='localhost',master_port=3307,master_user='repl',master_password='slave@123',master_log_file='mysql-bin.000001',master_log_pos=643;
-``````
+~~~~~~
 
 启动slave:
 
-``````
+~~~~~~
 mysql> start slave;
-``````
+~~~~~~
 
 查看slave 状态：
 
-``````
+~~~~~~
 mysql>show slave status;
-``````
+~~~~~~
 
-三、配置mycat，做读写分离，主从切换，和全局序列号测试：
+配置mycat
+------
+
+我们使用mycat数据库中间件来实现读写分离，主从切换，以及分库分表。mycat如何使用，建议先阅读《Mycat权威指南》，文档最后有链接，本文不再赘述。
 
 3.1、配置逻辑库和表信息，以及配置读写分离和自动主从切换
 
@@ -141,7 +147,7 @@ u8server中， 游戏，渠道商，渠道，管理员，权限等数据都属�
 
 schema.xml:
 
-``````
+~~~~~~
 <?xml version="1.0"?>
 <!DOCTYPE mycat:schema SYSTEM "schema.dtd">
 <mycat:schema xmlns:mycat="http://io.mycat/">
@@ -185,18 +191,18 @@ schema.xml:
     </dataHost>
 
 </mycat:schema>
-``````
+~~~~~~
 
 3.2、配置mycat 用户权限
 
 server.xml中添加user配置：
 
-``````
+~~~~~~
     <user name="root">
         <property name="password">xiaohei</property>
         <property name="schemas">udb_mycat</property>
     </user>
-``````
+~~~~~~
 
 3.3、设置mycat全局序列号方式为 数据库方式：
 
@@ -206,7 +212,7 @@ server.xml中搜索sequnceHandlerType， 然后将其值设置为1， 表示，�
 
 3.4、创建全局序列号数据表和对应函数。 我们在dn1上面建立。
 
-``````
+~~~~~~
 DROP TABLE IF EXISTS `mycat_sequence`;
 CREATE TABLE `mycat_sequence` (
   `name` varchar(50) NOT NULL,
@@ -265,13 +271,13 @@ INSERT INTO `mycat_sequence` VALUES ('UADMINROLE', '100000', '100');
 INSERT INTO `mycat_sequence` VALUES ('UUSER', '100000', '100');
 INSERT INTO `mycat_sequence` VALUES ('UDEVICE', '100000', '100');
 
-``````
+~~~~~~
 
 3.5、指定全局序列号数据所在节点
 
 sequence_db_conf.properties文件中，增加如下配置：
 
-``````
+~~~~~~
 #sequence stored in datanode
 GLOBAL=dn1
 UCHANNEL=dn1
@@ -283,11 +289,12 @@ UADMIN=dn1
 UADMINROLE=dn1
 UUSER=dn1
 UDEVICE=dn1
-``````
+~~~~~~
 
 3.6、重启mycat
 
-四、mycat分库分表配置
+Mycat分库分表配置
+------
 
 在U8Server中，数据量最可能超出单机极限的是uuser用户表和uorder订单表。这个时候，就需要对这两张表做分库分表，对数据进行水平切分。分库分表之后，最可能引入的问题是，跨表Join查询和分布式事务问题。
 
@@ -298,7 +305,7 @@ UDEVICE=dn1
 选定分库分表规则之后，另一个需要考虑的问题，是扩容减容问题。比如一开始我们有两个存储节点，按照id mod 2进行分库分表。
 当数据量进一步提升，我们需要扩容一个新的存储节点。这个时候，我们按照id mod 3规则进行分库分表之后，需要对原有数据按照新的规则，进行迁移。当数据节点过多时，数据迁移可能会花费大量时间。
 
-针对这个难题，一致性hash算法规则能最大限度地决绝数据扩容和减容，同时又能够尽可能让数据均匀地分布在各个存储节点。mycat中已经有对一致性hash算法的支持。
+针对这个难题，一致性hash算法规则能最大限度地减少扩容之后需要迁移的数据量，同时又能够尽可能让数据均匀地分布在各个存储节点。mycat中已经有对一致性hash算法的支持。
 
 这里，我们演示下，如何对uuser表和uorder表进行分库分表切分。 我们这里采用采用两个存储节点，使用uuser的id mod 2 规则进行数据的切分。同时，基于Mycat的ER表特性，我们将uorder分库分表规则，依赖uuser。也就是，让同一个用户的所有订单数据，和uuser记录划分到同一个存储节点。
 
@@ -314,7 +321,7 @@ UDEVICE=dn1
 
 修改之后，完整的schema.xml配置如下：
 
-``````
+~~~~~~
 <?xml version="1.0"?>
 <!DOCTYPE mycat:schema SYSTEM "schema.dtd">
 <mycat:schema xmlns:mycat="http://io.mycat/">
@@ -377,9 +384,10 @@ UDEVICE=dn1
     </dataHost>
 
 </mycat:schema>
-``````
+~~~~~~
 
-五、测试
+测试
+------
 
 将U8Server和U8ServerManager中jdbc.properties中，数据库ip和端口，改为mycat所在服务器的ip，mycat默认端口为8066。然后重启U8Server和U8ServerManager实例。
 
@@ -402,14 +410,16 @@ UDEVICE=dn1
 插入四条uorder记录， 其中三条的userID和hostM3中的uuser记录对应，查看其是否也被写入到hostM3中。其中一条的userID和hostM1中的uuser记录对应，查看其是否会被写入到hostM1中。
 
 
-六、遇到的问题
+遇到的问题
+------
 
 1、代码中，之前企业版分离U8SeverManager时，对于uchannelmaster和ugame两个实体类中，没有定义自增长，而是采用启动时，加载全局数据，取出最大ID，然后内存中每次递增ID。这个属于代码历史遗留问题。这次一并将其改为主键自增长方式，不再采用老的方式。
 
 2、数据库中，uchannelmaster和ugame两张表的主键，加上自动递增选项。
 
 
-七、总结
+总结
+------
 
 
 数据量大到一定规模，引入分库分表之后，有一些问题需要解决或者注意。
@@ -434,7 +444,8 @@ UDEVICE=dn1
 Mycat本身几乎是无状态的，所以可以参考Mycat的高可用性部署方案。具体部署方案，可以参考Mycat权威指南。
 
 
-相关资料：
+相关资料
+------
 
 [Mycat官方网站](http://www.mycat.org.cn/)
 [一致性hash算法](http://www.cnblogs.com/rainwang/p/4309102.html)
