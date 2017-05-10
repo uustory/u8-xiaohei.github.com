@@ -56,7 +56,7 @@ config.json支持指定Architectures,
 如果希望只支持arm64:
 ```json
 {
-    "archs": "armv7"
+    "archs": "arm64"
 }
 ```
 
