@@ -38,6 +38,7 @@
   * [服务器端接入](u8server_addchannel.md)    
   - - - -  
   * [iOS插件调试](ios_debug.md)
+  * [配置说明](ios_package.md)
   * [证书指定](ios_codesign.md)
   - - - -  
   * [自定义脚本](ios_script.md)

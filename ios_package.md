@@ -7,7 +7,7 @@ ios版本的游戏打包目录可以放在任何地方, 这点跟apk打包必须
 执行ios打包脚本的时候通过参数指定打包目录
 打包目录下有common和channels两个子目录, common目录是"基础配置", channels下面的每个子目录对应一个"渠道配置"
 
-**为了方便，将我们提供的game1中所有的东西，拷贝过来。**
+**为了方便，将我们提供的u8test中的common目录和channels目录拷贝过来。**
 
 #### 修改打包配置
 
@@ -107,3 +107,36 @@ NOTE:部分渠道有闪屏要求，一般我们可以在游戏工作目录中的
 
 ```
 ![](images/ios_launchimages.png)
+
+
+其他
+-------------
+
+#### 修改App的显示名称
+在config.json里面加入"CFBundleDisplayName"字段
+```
+{
+	"CFBundleDisplayName": "游戏名称"
+}
+```
+
+#### 修改App的BundleId
+在config.json里面加入"CFBundleIdentifier"字段
+```
+{
+	"CFBundleIdentifier": "abc.def.ghi"
+}
+```
+
+#### 修改App的版本号
+
+在config.json里面加入"CFBundleVersion"字段和"CFBundleShortVersionString"字段  
+(**如果只指定"CFBundleVersion"而未指定CFBundleShortVersionString,
+打出的包的CFBundleShortVersionString会和CFBundleVersion一样**)
+
+```
+{
+	"CFBundleVersion": "1.0.0",
+	"CFBundleShortVersionString": "1.0.0"
+}
+```
