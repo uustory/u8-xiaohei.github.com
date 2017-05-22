@@ -11,6 +11,8 @@
 
   * [打出渠道包](package.md)
   * [打包工具说明](package_readme.md)
+  - - - -
+  * [远程日志(Android)](android_remote_log.md)
 
 [Android文档]()
 
