@@ -89,6 +89,11 @@ Android平台
 | 70    | 07073手游 | U8SDK_SY07073  | sy07073 |
 | 71    | 海马玩 | U8SDK_HaiMa  | haima |
 | 72    | 说玩 | U8SDK_ShuoWan  | shouwan |
+| 73    | 三星 | U8SDK_Samsung  | samsung |
+| 74    | 天天游戏中心 | U8SDK_TianTian  | tiantian |
+| 75    | play800 | U8SDK_Play800  | play800 |
+| 76    | 拇指游玩 | U8SDK_MuZhiYouWan  | muzhiyouwan |
+
 
 
 iOS平台
@@ -115,3 +120,7 @@ iOS平台
 | 17    | 叉叉助手 | U8SDK_xx | xx |
 | 18    | XY助手 | U8SDK_xy | xy |
 | 19    | 友游(云点联动) | U8SDK_youyou | youyou |
+| 20    | 拇指游玩 | U8SDK_MZYW | mzyw |
+| 21    | Play800 | U8SDK_Play800 | play800 |
+| 22    | 手盟 | U8SDK_SM910 | sm910 |
+| 23    | YY | U8SDK_YY | yy |
