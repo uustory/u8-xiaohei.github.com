@@ -36,6 +36,7 @@ Android渠道
 AppID：安峰提供的游戏数字ID
 AppKey：安峰提供的签名密钥
 
+
 **安智**
 
 AppKey: 安智提供的AppKey
@@ -387,7 +388,59 @@ CpID：对方提供的PID
 AppKey：对方提供的AppKey
 
 
+**海马玩**
 
+AppID: 对方提供的AppID
+AppKey: 对方提供的AppKey
+
+**说玩**
+AppKey: 对方提供的key
+
+**三星**
+
+PayPublicKey: 三星提供的支付公钥
+
+**天天游戏中心**
+
+AppKey:对方提供的支付校验key
+
+**Play800(Android)**
+
+AppKey: 对方提供的支付校验key
+
+**Play800(iOS)**
+
+AppID:对方提供的AppID
+AppKey:对方提供的AppKey
+
+**拇指游玩**
+
+AppKey：对方提供的key
+
+**9377**
+
+AppKey: 对方提供的appkey
+
+
+**新浪微博**
+
+AppID:对方提供的AppKey
+AppKey:对方提供的signature key
+AppSecret:对方提供的App Secret
+
+**8868**
+
+CPID: 对方提供的Cp ID
+AppID: 对方提供的App ID
+AppKey: 对方提供的App Key
+
+**掌阅**
+
+AppKey: 对方提供的DES Key
+
+**游戏Fan**
+
+AppKey:对方提供的App Key
 
 
 
