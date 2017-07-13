@@ -75,6 +75,7 @@ NOTE: 如果你还没有搭建好U8Server的开发环境，建议你参考[这�
 	money：当前充值金额，单位分
 	roleID：当前游戏内角色ID
 	roleName：当前游戏内角色名称
+    roleLevel;   玩家等级    
 	serverID：当前玩家所在的服务器ID
 	serverName：当前玩家所在的服务器名称
 	extension：自定义字段，支付回调的时候，会原封不动回调给游戏服务器
@@ -101,20 +102,21 @@ sign 签名算法：
 
         StringBuilder sb = new StringBuilder();
         sb.append("userID=").append(token.getUserID()).append("&")
-                .append("productID=").append(data.getProductId()).append("&")
-                .append("productName=").append(data.getProductName()).append("&")
-                .append("productDesc=").append(data.getProductDesc()).append("&")
+                .append("productID=").append(data.getProductId() == null ? "" : data.getProductId()).append("&")
+                .append("productName=").append(data.getProductName() == null ? "" : data.getProductName()).append("&")
+                .append("productDesc=").append(data.getProductDesc() == null ? "" : data.getProductDesc()).append("&")
                 .append("money=").append(data.getPrice() * 100).append("&")
-                .append("roleID=").append(data.getRoleId()).append("&")
-                .append("roleName=").append(data.getRoleName()).append("&")
-                .append("serverID=").append(data.getServerId()).append("&")
-                .append("serverName=").append(data.getServerName()).append("&")
-                .append("extension=").append(data.getExtension());
+                .append("roleID=").append(data.getRoleId() == null ? "" : data.getRoleId()).append("&")
+                .append("roleName=").append(data.getRoleName() == null ? "" : data.getRoleName()).append("&")
+                .append("roleLevel=").append(data.getRoleLevel()).append("&")
+                .append("serverID=").append(data.getServerId() == null ? "" : data.getServerId()).append("&")
+                .append("serverName=").append(data.getServerName() == null ? "" : data.getServerName()).append("&")
+                .append("extension=").append(data.getExtension() == null ? "" : data.getExtension());
         
         //这里是游戏服务器自己的支付回调地址，可以在下单的时候， 传给u8server。
         //u8server 支付成功之后， 会优先回调这个地址。 如果不传， 则需要在u8server后台游戏管理中配置游戏服务器的支付回调地址
         //如果传notifyUrl，则notifyUrl参与签名
-        if(data.getPayNotifyUrl() != null){
+        if(!TextUtils.isEmpty(data.getPayNotifyUrl())){
             sb.append("&notifyUrl=").append(data.getPayNotifyUrl());
         }
         
@@ -150,6 +152,7 @@ sign 验证算法(验证使用的公钥是U8Server创建游戏的时候生成的
                 .append("money=").append(this.money).append("&")
                 .append("roleID=").append(this.roleID == null ? "" : this.roleID).append("&")
                 .append("roleName=").append(this.roleName == null ? "" : this.roleName).append("&")
+                .append("roleLevel=").append(this.roleLevel == null ? "" : this.roleLevel).append("&")
                 .append("serverID=").append(this.serverID == null ? "" : this.serverID).append("&")
                 .append("serverName=").append(this.serverName == null ? "" : this.serverName).append("&")
                 .append("extension=").append(this.extension == null ? "" : this.extension);
