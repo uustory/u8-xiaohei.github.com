@@ -31,6 +31,13 @@ NOTE:UChannel中预设了8个字段来配置渠道参数。 每个渠道的参�
 Android渠道
 ------
 
+**爱游戏**
+
+AppID：对方提供的Client ID
+AppKey：对方提供的AppKey
+AppSecret: 对方提供的client secret
+
+
 **安峰**
 
 AppID：安峰提供的游戏数字ID
@@ -70,9 +77,7 @@ AppKey: 友游提供的 appkey
 
 AppID: 酷派提供的 APP ID
 AppKey: 酷派提供的 appkey
-PayPublicKey: 酷派提供的 平台公钥
-PayPrivateKey: 酷派提供的 平台私钥
-特殊配置：酷派后台添加的一条应用内传入价格(开放价格)类型的商品的ID，一般是数字1。可以去酷派后台查看
+PayPublicKey: 酷派提供的 PayKey
 
 **逗逗SDK(盛大)**
 
@@ -307,60 +312,6 @@ AppID：对方提供的App_ID
 AppKey：对方提供的App_Key
 
 
-iOS渠道
-------
-
-**91助手**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-
-**AppStore**
-
-无需配置
-
-**海马玩**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-
-**iTools**
-
-AppID：对方提供的AppID
-PayPublicKey：对方提供的解密公钥
-
-**快用**
-
-AppKey：对方提供的AppKey
-PayPublicKey：对方提供的公钥
-
-**泡椒**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-
-**PP助手**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-PayPublicKey：对方提供的公钥
-
-**同步推**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-
-**叉叉助手(果盘)**
-
-AppID：果盘提供的应用编号(APP ID)
-AppSecret: 果盘提供的server secret key
-
-**XY助手**
-
-AppID：对方提供的AppID
-AppKey：对方提供的AppKey
-AppPublicKey：对方提供的支付密钥
-
 **葫芦侠**
 
 AppID：对方提供的AppID
@@ -441,6 +392,92 @@ AppKey: 对方提供的DES Key
 **游戏Fan**
 
 AppKey:对方提供的App Key
+
+**顺网**
+
+CPID：对方提供的Cp ID
+AppID: 对方提供的App Id
+AppKey: 对方提供的App Key
+AppSecret: 对方提供的充值密钥
+
+**天宇游**
+
+AppID: 对方提供的app_id
+AppKey: 对方提供的app_key
+
+**触动互娱**
+
+AppID: 对方提供的appid
+AppKey: 对方提供的appsign
+
+**全名点游**
+
+AppSecret: 对方提供的共享密钥
+
+**游戏猫**
+
+CPID：对方提供的GameCatChlId
+AppID: 对方提供的game_id
+AppKey: 对方提供的GameCatAppKey
+AppSecret: 对方提供的AES密钥
+PayID: 对方提供的服务端通知支付结果密钥
+
+
+iOS渠道
+------
+
+**91助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**AppStore**
+
+无需配置
+
+**海马玩**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**iTools**
+
+AppID：对方提供的AppID
+PayPublicKey：对方提供的解密公钥
+
+**快用**
+
+AppKey：对方提供的AppKey
+PayPublicKey：对方提供的公钥
+
+**泡椒**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**PP助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+PayPublicKey：对方提供的公钥
+
+**同步推**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+
+**叉叉助手(果盘)**
+
+AppID：果盘提供的应用编号(APP ID)
+AppSecret: 果盘提供的server secret key
+
+**XY助手**
+
+AppID：对方提供的AppID
+AppKey：对方提供的AppKey
+AppPublicKey：对方提供的支付密钥
+
+
 
 
 

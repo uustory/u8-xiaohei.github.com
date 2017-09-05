@@ -102,6 +102,15 @@ Android平台
 | 80    | 掌阅 | U8SDK_ZhangYue  | zhangyue |/pay/zhangyue/payCallback|
 | 81    | 游戏Fan | U8SDK_YouXiFan  | youxifan |/pay/youxifan/payCallback|
 | 82    | iTools | U8SDK_iTools  | itools |/pay/itools/payCallback|
+| 83    | 顺网 | U8SDK_ShunWang  | shunwang |/pay/shunwang/payCallback|
+| 84    | 天宇游 | U8SDK_TianYuYou  | tianyuyou |/pay/tianyuyou/payCallback|
+| 85    | 触动互娱 | U8SDK_ChuDong  | chudong |/pay/chudong/payCallback|
+| 86    | 全名点游 | U8SDK_QuanMingDianYou  | quanmingdianyou |/pay/quanmingdianyou/payCallback|
+| 87    | 游戏猫 | U8SDK_YouXiMao  | youximao |/pay/youximao/payCallback|
+| 88    | 卓易市场 | U8SDK_ZhuoYi  | zhuoyi |/pay/zhuoyi/payCallback|
+| 89    | 狐狸助手 | U8SDK_HuLi  | huli |/pay/huli/payCallback|
+| 90    | 蓝蝶模拟器 | U8SDK_BlueStack  | bluestack |/pay/bluestack/payCallback|
+| 91    | 爱应用 | U8SDK_iApps  | iapps |/pay/iapps/payCallback|
 
 
 
