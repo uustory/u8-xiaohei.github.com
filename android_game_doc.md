@@ -410,8 +410,10 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 
 ```
 
-请求地址：游戏服接收请求的http地址，客户端支付的时候，传入。
-请求方式：POST (application/json格式)
+请求地址：游戏服接收请求的http地址，客户端支付的时候，传入。回调参数支持两种方式：application/json和x-www-form-urlencoded
+请求方式：POST 
+
+2.1 参数格式：application/json
 请求参数(JSON格式)：
     {
         state:状态，1：成功;其他失败
@@ -431,9 +433,27 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
         }
     }
 
-返回：
 
-游戏服处理成功，直接返回一个"SUCCESS"字符串到U8Server即可。失败，返回一个"FAIL"字符串。
+2.2 参数格式：x-www-form-urlencoded
+请求参数:
+
+    productID：商品ID
+    orderID: 订单号
+    userID: 用户ID
+    channelID: 渠道ID
+    gameID: 游戏ID
+    serverID：游戏服务器ID
+    money:充值金额，单位分
+    currency：货币类型，默认RMB
+    extension：获取订单号服务器传过来的自定义参数，原样返回
+
+    signType：签名类型，目前支持md5和rsa，可以自己设定。 该字段不参与签名
+    sign：签名值。 该字段不参与签名
+
+
+游戏服务器返回：
+
+游戏服务器处理成功，直接返回一个"SUCCESS"字符串到U8Server即可。失败，返回一个"FAIL"字符串。
 
 ```
 
