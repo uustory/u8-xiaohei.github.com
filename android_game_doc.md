@@ -410,8 +410,9 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 
 ```
 
-请求地址：游戏服接收请求的http地址，客户端支付的时候，传入。回调参数支持两种方式：application/json和x-www-form-urlencoded
+请求地址：游戏服接收请求的http地址，客户端支付的时候，传入。
 请求方式：POST 
+回调参数格式：支持两种方式：application/json和x-www-form-urlencoded。 企业版本的话，在jdbc.properties中，通过u8server.pay_content_type这个设置。开源版本，在com.u8.server.web.pay.SendAgent.java中常量控制。请确认使用一种，以后就不要再做更改。
 
 2.1 参数格式：application/json
 请求参数(JSON格式)：
@@ -427,7 +428,7 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
             money:充值金额，单位分
             currency：货币类型，默认RMB
             extension：获取订单号服务器传过来的自定义参数，原样返回
-
+            roleID: 角色ID， 注意：该字段不参与签名
             signType：签名类型，目前支持md5和rsa，可以自己设定。 该字段不参与签名
             sign：签名值。 该字段不参与签名
         }
@@ -435,7 +436,7 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 
 
 2.2 参数格式：x-www-form-urlencoded
-请求参数:
+请求参数(注意没有state和data了):
 
     productID：商品ID
     orderID: 订单号
@@ -446,7 +447,7 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
     money:充值金额，单位分
     currency：货币类型，默认RMB
     extension：获取订单号服务器传过来的自定义参数，原样返回
-
+    roleID: 角色ID， 注意：该字段不参与签名
     signType：签名类型，目前支持md5和rsa，可以自己设定。 该字段不参与签名
     sign：签名值。 该字段不参与签名
 
@@ -457,9 +458,9 @@ NOTE:选择服务器时，因为还没有进入游戏，无法知道角色数据
 
 ```
 
-游戏服务器sign验证规则：
+游戏服务器sign验证规则(收到数据之后，先对收到的数据进行urldecode)：
 
-首先对收到的data中的数据进行解析， 解析出来之后，除了signType和sign两个字段外(开源版本u8server的话，platID也不加入签名)， 其他所有的字段按照字母排列顺序进行组合,格式如下：
+（如果是application/json格式，对收到的data中的数据做签名验证）， 上面参数中，除了roleID, signType和sign三个字段外(开源版本u8server的话，platID也不加入签名)， 其他所有的字段按照字母排列顺序进行组合,格式如下：
 
 signStr = "channelID=5&currency=RMB&.....&userID=4344"
 
@@ -467,7 +468,7 @@ signStr = "channelID=5&currency=RMB&.....&userID=4344"
 
 signStr +=  "&" + SecretKey
 
-这样得到的signStr，就是待校验的数据字符串了。
+这样得到的signStr，就是待校验的数据字符串了。验证方式，U8Server企业版，可以在jdbc.properties中通过u8server.pay_sign_method来控制，可以填MD5或者RSA。 U8Server开源版本可以在com.u8.server.web.pay.SendAgent.java中常量中设置。
 
 **如果signType=="md5"，那么就直接这样验证：**
 

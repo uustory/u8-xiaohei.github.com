@@ -66,9 +66,10 @@
   * [后台管理](u8server_manager.md)
   * [分库分表](u8server_mycat.md)
 
-[官方网站](http://www.u8sdk.com)
+[官方网站](http://www.6xsdk.com)
 [官方博客](http://www.uustory.com)
-[问答社区](http://www.uustory.com/sdk)
+[XSDK文档](http://www.6xsdk.com/xsdk-wiki)
+[视频教程](https://chuanke.baidu.com/s2869716.html)
 
 <!-- counter pixel for counting visitors -->
 <!-- <img src="http://stats.markdown.io/mdwiki_info.gif" style="display:none;"/> -->
